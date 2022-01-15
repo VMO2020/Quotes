@@ -1,0 +1,111 @@
+@use 'sass:math';
+
+// FONT-SIZE RESPONSIVE - Mobile First -----------------------------------------------------
+// The calculation is:
+// minSize + (maxSize - minSize) * ( (100vw - minWidth) / ( maxWidth - minWidth) )
+
+@mixin font-size(
+	$minValue,
+	// minSize
+	$maxValue,
+	// maxSize
+) {
+	$fdiff: #{num($maxValue) - num($minValue)};
+	$breakdiff: #{num($maxWidth) - num($minWidth)};
+	// Mobile (Default Size)
+	font-size: $minValue;
+
+	// Tablet Size
+	@media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+		font-size: calc(
+			#{$minValue} + #{$fdiff} * ((100vw - #{$minWidth}) / #{$breakdiff})
+		);
+	}
+
+	// Desktop Size
+	@media only screen and (min-width: $maxWidth) {
+		font-size: $maxValue;
+	}
+}
+
+// MEDIA QUERY (RESPONSIVE Mobile First)----------------------------------------
+// General (min-width only) or (min-width, max-width):
+@mixin mQ($args...) {
+	@if length($args) == 1 {
+		@media screen and (min-width: nth($args, 1)) {
+			@content;
+		}
+	}
+	@if length($args) == 2 {
+		@media screen and (min-width: nth($args, 1)) and (max-width: nth($args, 2)) {
+			@content;
+		}
+	}
+}
+// On screens that are 600px or less
+@mixin mobile {
+	@media only screen and (max-width: $minWidth) {
+		@content;
+	}
+}
+// On screens that are into 600px and 1200px
+@mixin tablet {
+	@media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+		@content;
+	}
+}
+// On screens that are 1200px or more
+@mixin desktop {
+	@media only screen and (min-width: $maxWidth) {
+		@content;
+	}
+}
+
+// Image & Cards RESPONSIVE Size, with optional aspect ratio --------------------------------
+// (minWidth, maxWidth, widthRatio (Optional), heightRatio (Optional))
+@mixin size($args...) {
+	$minValue: nth($args, 1); // minSize
+	$maxValue: nth($args, 2); // maxSize
+	$valueDiff: #{num($maxValue) - num($minValue)};
+	$breakDiff: #{num($maxWidth) - num($minWidth)};
+
+	// Mobile (Default Size)
+	position: relative;
+	width: $minValue;
+	$width: $minValue;
+
+	// Tablet Size
+	@media only screen and (min-width: $minWidth) and (max-width: $maxWidth) {
+		position: relative;
+		width: calc(
+			#{$minValue} + #{$valueDiff} * ((100vw - #{$minWidth}) / #{$breakDiff})
+		);
+		$width: calc(
+			#{$minValue} + #{$valueDiff} * ((100vw - #{$minWidth}) / #{$breakDiff})
+		);
+	}
+
+	// Desktop Size
+	@media only screen and (min-width: $maxWidth) {
+		position: relative;
+		width: $maxValue;
+		$width: $maxValue;
+	}
+
+	// Height calculation
+	@if length($args) == 2 {
+		height: auto;
+	}
+	@if length($args) == 4 {
+		$w: nth($args, 3); // with ratio
+		$h: nth($args, 4); // height ratio
+		$ratio: calc($h / $w);
+		height: $width * $ratio;
+	}
+}
+
+//  strip units helper function
+
+@function num($input) {
+	@return math.div($input, $input * 0 + 1);
+}

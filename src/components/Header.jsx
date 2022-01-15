@@ -1,0 +1,137 @@
+import React from 'react';
+
+// helpers
+import { clearLocalStoreValue } from '../helpers/LocalStore';
+
+// Icons
+import { ReactComponent as IconFace } from '../assets/icons/face.svg';
+import { ReactComponent as IconShare } from '../assets/icons/share.svg';
+
+// Styles
+import './header.scss';
+
+// Read JSON Data
+const geninfo = require('../data/geninfo.json').data;
+
+export const Header = ({
+	user,
+	avatar,
+	authorList,
+	setUser,
+	setAvatar,
+	setUserAdmin,
+	setAuthorFiltered,
+	setOpenLogin,
+	setOpenRegister,
+	setOpenShare,
+	setOpenQuoteRegister,
+	setOpenAuthorRegister,
+}) => {
+	const handleSelector = (name) => {
+		// console.log(name);
+		name !== 'all' ? setAuthorFiltered(name) : setAuthorFiltered('all');
+	};
+
+	const handleLogin = () => {
+		setOpenLogin(true);
+	};
+
+	const handleShare = () => {
+		setOpenShare(true);
+	};
+
+	const handleLogout = () => {
+		setUser('');
+		setAvatar('');
+		setUserAdmin(false);
+		clearLocalStoreValue('auth-ID');
+	};
+
+	const handleAuthorRegister = () => {
+		if (user) {
+			setOpenAuthorRegister(true);
+		} else {
+			setOpenLogin(true);
+		}
+	};
+
+	const handleQuoteRegister = () => {
+		if (user) {
+			setOpenQuoteRegister(true);
+		} else {
+			setOpenLogin(true);
+		}
+	};
+
+	const handleRegister = () => {
+		setOpenRegister(true);
+	};
+
+	return (
+		<div>
+			<div className='header__line line1'>
+				<h3>
+					<a
+						className='logo'
+						href={geninfo[0].webpage}
+						target='_blank'
+						rel='noreferrer'
+					>
+						<i>Quotes</i>
+					</a>
+				</h3>
+				<div className='line-items'>
+					{user ? (
+						<button className='login' onClick={handleLogout}>
+							Log out
+						</button>
+					) : (
+						<button className='login' onClick={handleLogin}>
+							Log in
+						</button>
+					)}
+					{!user && (
+						<button className='register' onClick={handleRegister}>
+							Sign up
+						</button>
+					)}
+					{avatar ? (
+						<img className='image-avatar_header' src={avatar} alt='avatar' />
+					) : (
+						<p className='icon'>{user && <IconFace />}</p>
+					)}
+				</div>
+			</div>
+			<div className='header__line line2'>
+				<div className='line-items'>
+					<select
+						id='author'
+						name='author'
+						className='custom-select'
+						onChange={(e) => handleSelector(e.target.value, 'author')}
+					>
+						<option value='all'>All authors</option>
+						{authorList.map((name) => (
+							<option key={name._id} value={name.name}>
+								{name.name}
+							</option>
+						))}
+					</select>
+				</div>
+				<div className='line-items'>
+					<button className='quote-register' onClick={handleShare}>
+						<span className='icon'>
+							<IconShare />
+						</span>
+					</button>
+					<button className='author-register' onClick={handleAuthorRegister}>
+						Add Author
+					</button>
+					<button className='quote-register' onClick={handleQuoteRegister}>
+						Add Quote
+					</button>
+				</div>
+			</div>
+		</div>
+	);
+};

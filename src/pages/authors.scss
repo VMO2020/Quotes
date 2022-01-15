@@ -1,0 +1,75 @@
+@import '../styles/styles.scss';
+
+.authors {
+	width: 100vw;
+	max-width: $maxWidth;
+	margin: auto;
+	padding: 0;
+	color: $Dark;
+	background: $Light;
+
+	header {
+		@include font-size(20px, 28px);
+		position: fixed;
+		display: block;
+		width: 100%;
+		max-width: $maxWidth;
+		height: 5vh;
+		color: $Light;
+		background-color: $mainColor;
+		text-align: center;
+		line-height: 5vh;
+		margin-bottom: 1em;
+		z-index: 10;
+
+		.icon {
+			display: flex;
+			height: 5vh;
+			position: absolute;
+			color: $Light;
+			top: 0;
+			right: 1em;
+
+			svg {
+				@include size(18px, 28px);
+				fill: $Light;
+				margin: auto;
+				transition: all 0.5s ease;
+
+				&:hover {
+					fill: $mainColor;
+					background: $Light;
+				}
+			}
+		}
+	}
+
+	main {
+		position: relative;
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		width: 100%;
+		height: 95vh;
+		margin: auto;
+		padding-top: 6vh;
+		padding-bottom: 3em;
+		overflow-y: auto;
+
+		#top {
+			position: absolute;
+			top: 0;
+			height: 6vh;
+			color: $Light;
+		}
+
+		.list-container {
+			width: 100%;
+			display: flex;
+			justify-content: center;
+			align-self: start;
+			flex-wrap: wrap;
+			// border: 1px solid red;
+		}
+	}
+}

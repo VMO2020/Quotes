@@ -1,0 +1,68 @@
+@import '../styles/styles.scss';
+
+.author_card-container {
+	position: relative;
+	width: 100vw;
+	max-width: 420px;
+	padding: 1em;
+	padding-top: calc(100px + 1em);
+	margin: 0.5em;
+	border-radius: 0.5em;
+	overflow: hidden;
+	border: 1px solid $ExtraLight;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+
+	p {
+		font-size: 20px;
+	}
+
+	li {
+		width: 100%;
+		display: flex;
+
+		&.tags {
+			display: block;
+			margin-left: 3em;
+
+			p {
+				font-size: 18px;
+			}
+		}
+
+		p {
+			font-size: 20px;
+			line-height: 30px;
+
+			&.created {
+				font-size: 16px;
+				color: $MedLight;
+			}
+		}
+
+		a.wiki {
+			font-size: 18px;
+			line-height: 30px;
+			color: blue;
+			text-decoration: none;
+		}
+	}
+	li.photo {
+		img {
+			position: absolute;
+			top: 0.7em;
+			left: 50%;
+			transform: translateX(-50%);
+			width: 5em;
+			height: 5em;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+}
+
+// Desktop Size
+@media screen and (min-width: 1200px) {
+	.author_card-container {
+		max-width: 390px;
+	}
+}

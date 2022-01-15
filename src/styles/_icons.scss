@@ -1,0 +1,44 @@
+.icon {
+	display: flex;
+	height: 4vh;
+
+	svg {
+		@include size(18px, 28px);
+		fill: $Light;
+		margin: auto;
+
+		&:hover,
+		:focus {
+			fill: $mainColor;
+		}
+	}
+}
+
+.icon-close {
+	display: flex;
+	height: 5vh;
+
+	svg {
+		@include size(22px, 28px);
+		fill: $Dark;
+		margin: auto;
+	}
+}
+
+.icons-container {
+	display: flex;
+
+	.icons-quote {
+		display: flex;
+		height: 4vh;
+		border: none;
+		margin-right: 2em;
+
+		svg {
+			@include size(20px, 24px);
+			fill: $MedLight;
+			background: $Light;
+			margin: 0;
+		}
+	}
+}

@@ -1,0 +1,96 @@
+@import '../styles/styles.scss';
+
+.header__line {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 5vh;
+	padding-left: 0.3em;
+	padding-right: 0.3em;
+
+	h3 {
+		height: 4vh;
+		a {
+			color: $Light;
+			text-decoration: none;
+			transition: all 0.5s ease;
+
+			&:hover {
+				color: $mainColor;
+				border: 2px solid $mainColor;
+				background-color: $Light;
+				padding-left: 0.5em;
+				padding-right: 0.5em;
+				border-radius: 0.5em;
+			}
+		}
+	}
+
+	.line-items {
+		display: flex;
+		height: 5vh;
+
+		button {
+			// @include font-size(16px, 22px);
+			font-size: 0.9em;
+			padding: 0;
+			padding-left: 0.5em;
+			padding-right: 0.5em;
+			margin-right: 0.5em;
+			margin-top: 0.3em;
+			height: 1.5em;
+			color: $Light;
+			background-color: $mainColor;
+			border-radius: 0.5em;
+			border: 2px solid $Light;
+			cursor: pointer;
+			transition: all 0.5s ease;
+
+			&:hover {
+				color: $mainColor;
+				border: 2px solid $mainColor;
+				background-color: $Light;
+				padding-left: 1em;
+				padding-right: 1em;
+
+				svg {
+					fill: $mainColor;
+				}
+			}
+		}
+
+		button.author-register,
+		button.quote-register {
+			border: none;
+		}
+
+		.custom-select {
+			// @include font-size(14px, 24px);
+			color: $Light;
+			margin: 0.5em 0;
+			height: 1.5em;
+			background: $mainColor;
+			outline: none;
+			cursor: pointer;
+			border: 2px solid $Light;
+			border-radius: 0.5em;
+			box-shadow: 3px 3px 6px $ExtraLight, -1px -1px 6px $ExtraLight;
+		}
+	}
+}
+
+// Desktop Size
+@media only screen and (min-width: $maxWidth) {
+	.header__line {
+		height: 6vh;
+
+		.line-items {
+			.custom-select {
+				@include font-size(14px, 24px);
+				margin: 0;
+				border: none;
+				box-shadow: none;
+			}
+		}
+	}
+}

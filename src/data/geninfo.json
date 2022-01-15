@@ -1,0 +1,19 @@
+{
+  "Content-Type": "application/vnd.api+json",
+  "data": [
+    {
+      "address": "Harringtone Chamber 26, North John Street, Liverpool, UK, L2 9RU",
+      "phone": "+44 7932 310506",
+      "phonecall": "tel:07932 310506",
+      "email": "victor.ottati@gmail.com",
+      "webpage": "https://vmog.net/",
+      "instagram": "https://www.instagram.com/victorottati/?hl=es",
+      "facebook": "https://www.facebook.com/Victor-Ottati-Photography-391329941710058/",
+      "youtube": "https://www.youtube.com/channel/UC6Y58Vgvr-odknPrBC-oY8Q",
+      "linkedin": "https://www.linkedin.com/in/ottati-victor-172b6124/",
+      "printer": "https://cults3d.com/en/users/victorottati/creations",
+      "github": "https://github.com/VMO2020",
+      "twitter": "https://twitter.com/vottati"
+    }
+  ]
+}

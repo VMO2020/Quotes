@@ -1,0 +1,39 @@
+@import '../styles/styles.scss';
+
+.card-container-user {
+	position: relative;
+	width: 98vw;
+	max-width: 330px;
+	padding: 1em;
+	margin: 0.5em;
+	border-radius: 5px;
+	// border: 2px solid $mainColor;
+	overflow: hidden;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+
+	li {
+		width: 100%;
+		display: flex;
+
+		p {
+			font-size: 20px;
+			line-height: 30px;
+
+			&.user-id {
+				font-size: 18px;
+				color: $MedLight;
+			}
+		}
+	}
+	li.photo {
+		display: flex;
+		justify-content: center;
+		margin-bottom: 0.3em;
+		img {
+			width: 5em;
+			height: 5em;
+			object-fit: cover;
+			border-radius: 50%;
+		}
+	}
+}

@@ -1,0 +1,71 @@
+@import '../styles/styles.scss';
+
+.quote_card-container {
+	width: 100vw;
+	max-width: 420px;
+	margin: 0;
+	padding: 1em;
+	padding-bottom: 0.5em;
+	border-radius: 5px;
+	border: 1px solid $ExtraLight;
+	overflow: hidden;
+	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
+
+	.photo {
+		display: flex;
+		width: 100%;
+		padding-left: 0.5em;
+		// justify-content: center;
+	}
+
+	li {
+		display: block;
+		width: 100%;
+		// border: 2px solid red;
+
+		p {
+			font-size: 20px;
+			line-height: 30px;
+
+			&.user-id {
+				font-size: 18px;
+			}
+
+			span {
+				font-size: 24px;
+			}
+
+			&#author {
+				text-align: right;
+				margin-right: 0.5em;
+				margin-top: 0.5em;
+			}
+		}
+	}
+	.icons-container {
+		margin-top: 0.6em;
+
+		.likes {
+			display: flex;
+			flex-direction: row;
+
+			.icons-quote {
+				margin-right: 0.5em;
+			}
+
+			p {
+				@include font-size(18px, 22px);
+				color: $MedLight;
+				height: 1.1em;
+				line-height: 1.1em;
+			}
+		}
+	}
+}
+
+// Desktop Size
+@media screen and (min-width: 1200px) {
+	.quote_card-container {
+		max-width: 390px;
+	}
+}
