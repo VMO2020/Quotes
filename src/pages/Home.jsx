@@ -5,10 +5,19 @@ import { Header } from '../components/Header';
 import { Main } from '../components/Main';
 import { Footer } from '../components/Footer';
 
+// Modals
+import { Modal } from '../components/Modal';
+import LoginForm from '../components/LoginForm';
+import RegisterForm from '../components/RegisterForm';
+import AuthorForm from '../components/AuthorForm';
+import QuoteForm from '../components/QuoteForm';
+import { Share } from '../components/Share';
+
 // Services
 import { GetAuthors } from '../services/getData';
 import AuthContextProvider from '../context/AuthContext';
 import AuthorContextProvider from '../context/AuthorContext';
+import QuotesContextProvider from '../context/QuotesContext';
 
 // helpers
 import { getLocalStoreValue } from '../helpers/LocalStore';
@@ -32,6 +41,7 @@ const Home = () => {
 		useContext(AuthContextProvider);
 	const { authorList, AuthorFiltered, setAuthorList, setAuthorFiltered } =
 		useContext(AuthorContextProvider);
+	const { dataList, setDataList } = useContext(QuotesContextProvider);
 
 	useEffect(() => {
 		// Helper Local Storage
@@ -45,6 +55,46 @@ const Home = () => {
 
 	return (
 		<div className='home-container'>
+			{openLogin && (
+				<Modal>
+					<LoginForm
+						setUser={setUser}
+						setAvatar={setAvatar}
+						setLiked={setLiked}
+						setUserAdmin={setUserAdmin}
+						setOpenLogin={setOpenLogin}
+						setOpenRegister={setOpenRegister}
+					/>
+				</Modal>
+			)}
+			{openRegister && (
+				<Modal>
+					<RegisterForm setUser={setUser} setOpenRegister={setOpenRegister} />
+				</Modal>
+			)}
+			{openAuthorRegister && (
+				<Modal>
+					<AuthorForm
+						user={user}
+						setOpenAuthorRegister={setOpenAuthorRegister}
+					/>
+				</Modal>
+			)}
+			{openQuoteRegister && (
+				<Modal>
+					<QuoteForm
+						user={user}
+						authorList={authorList}
+						setOpenRegister={setOpenRegister}
+						setOpenQuoteRegister={setOpenQuoteRegister}
+					/>
+				</Modal>
+			)}
+			{openShare && (
+				<Modal>
+					<Share setOpenShare={setOpenShare} url={'vmog.net/'} />
+				</Modal>
+			)}
 			<header>
 				<Header
 					user={user}
@@ -67,22 +117,11 @@ const Home = () => {
 				<Main
 					user={user}
 					liked={liked}
+					dataList={dataList}
 					authorList={authorList}
 					AuthorFiltered={AuthorFiltered}
-					openLogin={openLogin}
-					openQuoteRegister={openQuoteRegister}
-					openShare={openShare}
-					openRegister={openRegister}
-					openAuthorRegister={openAuthorRegister}
 					setUser={setUser}
-					setAvatar={setAvatar}
-					setLiked={setLiked}
-					setUserAdmin={setUserAdmin}
-					setOpenLogin={setOpenLogin}
-					setOpenShare={setOpenShare}
-					setOpenRegister={setOpenRegister}
-					setOpenQuoteRegister={setOpenQuoteRegister}
-					setOpenAuthorRegister={setOpenAuthorRegister}
+					setDataList={setDataList}
 				/>
 			</main>
 

@@ -1,13 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 // Components
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
-import AuthorForm from '../components/AuthorForm';
-import QuoteForm from '../components/QuoteForm';
-import { Modal } from '../components/Modal';
 import { Quote } from '../components/Quote';
-import { Share } from '../components/Share';
 
 // Services
 import { GetQuotes } from '../services/getData';
@@ -17,24 +11,13 @@ import './main.scss';
 
 export const Main = ({
 	user,
+	liked,
+	dataList,
 	authorList,
 	AuthorFiltered,
-	openLogin,
-	openRegister,
-	openShare,
-	openQuoteRegister,
-	openAuthorRegister,
 	setUser,
-	setAvatar,
-	setLiked,
-	setOpenShare,
-	setUserAdmin,
-	setOpenLogin,
-	setOpenRegister,
-	setOpenQuoteRegister,
-	setOpenAuthorRegister,
+	setDataList,
 }) => {
-	const [dataList, setDataList] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
 
@@ -60,56 +43,31 @@ export const Main = ({
 			<div id='top'></div>
 			{error && <h2 className='center'>{error}</h2>}
 			{loading && <h3 style={{ color: 'red' }}>Loading...</h3>}
-			{openLogin && (
-				<Modal>
-					<LoginForm
-						setUser={setUser}
-						setAvatar={setAvatar}
-						setLiked={setLiked}
-						setUserAdmin={setUserAdmin}
-						setOpenLogin={setOpenLogin}
-						setOpenRegister={setOpenRegister}
-					/>
-				</Modal>
-			)}
-			{openRegister && (
-				<Modal>
-					<RegisterForm setUser={setUser} setOpenRegister={setOpenRegister} />
-				</Modal>
-			)}
-			{openShare && (
-				<Modal>
-					<Share setOpenShare={setOpenShare} url={'vmog.net/'} />
-				</Modal>
-			)}
-			{openAuthorRegister && (
-				<Modal>
-					<AuthorForm
-						user={user}
-						setOpenAuthorRegister={setOpenAuthorRegister}
-					/>
-				</Modal>
-			)}
-			{openQuoteRegister && (
-				<Modal>
-					<QuoteForm
-						user={user}
-						authorList={authorList}
-						setOpenRegister={setOpenRegister}
-						setOpenQuoteRegister={setOpenQuoteRegister}
-					/>
-				</Modal>
-			)}
+
 			<div className='list-container'>
 				{AuthorFiltered !== 'all'
 					? quotesFiltered.map((quote) => (
 							<div key={quote._id}>
-								<Quote quote={quote} />
+								<Quote
+									user={user}
+									quote={quote}
+									liked={liked}
+									authorList={authorList}
+									setUser={setUser}
+									setDataList={setDataList}
+								/>
 							</div>
 					  ))
 					: dataList.map((quote) => (
 							<div key={quote._id}>
-								<Quote quote={quote} />
+								<Quote
+									user={user}
+									liked={liked}
+									quote={quote}
+									authorList={authorList}
+									setUser={setUser}
+									setDataList={setDataList}
+								/>
 							</div>
 					  ))}
 			</div>

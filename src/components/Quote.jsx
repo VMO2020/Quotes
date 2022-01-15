@@ -1,11 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Axios from 'axios';
 
-// Services
-import AuthContextProvider from '../context/AuthContext';
-import AuthorContextProvider from '../context/AuthorContext';
-import QuotesContextProvider from '../context/QuotesContext';
-
 // Icons
 import { ReactComponent as IconShare } from '../assets/icons/share.svg';
 import { ReactComponent as IconCopy } from '../assets/icons/content_copy.svg';
@@ -19,12 +14,14 @@ import './quote.scss';
 
 const URL = process.env.REACT_APP_URL;
 
-export const Quote = ({ quote }) => {
-	// Services Context
-	const { user, setUser, liked, userAdmin } = useContext(AuthContextProvider);
-	const { authorList } = useContext(AuthorContextProvider);
-	const { setDataList } = useContext(QuotesContextProvider);
-
+export const Quote = ({
+	user,
+	liked,
+	quote,
+	authorList,
+	setUser,
+	setDataList,
+}) => {
 	// States
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isCreator, setIsCreator] = useState(false);
@@ -101,21 +98,10 @@ export const Quote = ({ quote }) => {
 				config
 			);
 
-			// console.log(data);
-			handleDataUpdated(data, updateData);
+			console.log(data);
 		} catch (error) {
 			console.log(error.response.data.error);
 		}
-	};
-
-	const handleDataUpdated = async ({ data, updateData }) => {
-		console.log(data);
-		await setUser(data.updatedUser);
-		await setDataList(data.updatedQuote);
-		// if (updateData === 'like') {
-		// 	setIsFavorite(true);
-		// }
-		await handleRender();
 	};
 
 	return (
