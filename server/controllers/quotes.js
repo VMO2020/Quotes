@@ -46,3 +46,9 @@ export const registerQuote = async (req, res) => {
 		});
 	}
 };
+
+// UPDATE
+export const updateQuote = async (req, res) => {};
+
+// DELETE
+export const deleteQuote = async (req, res) => {};

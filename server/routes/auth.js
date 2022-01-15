@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { Register, Login, getUsers } from '../controllers/auth.js';
+import { Register, Login, getUsers, updateUser } from '../controllers/auth.js';
 
 // /api/user/register
 router.post('/register', Register);
@@ -9,5 +9,7 @@ router.post('/register', Register);
 router.post('/login', Login);
 // /api/user/list
 router.get('/list', getUsers);
+// /api/user/update
+router.patch('/update', updateUser);
 
 export default router;

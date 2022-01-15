@@ -1,4 +1,5 @@
 import User from '../models/User.js';
+import Quote from '../models/Quotes.js';
 import bcrypt from 'bcryptjs';
 
 // REGISTER
@@ -81,6 +82,7 @@ export const Login = async (req, res) => {
 			user: user._id,
 			ua: user.admin,
 			photo: user.photo,
+			liked: user.liked,
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -96,6 +98,67 @@ export const getUsers = async (req, res) => {
 		res.status(201).json({
 			success: true,
 			Users,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
+
+// UPDATE USER LIKES
+export const updateUser = async (req, res) => {
+	const { userId, quoteId, updateData } = req.body;
+	let likes = [];
+	let quote = {};
+	let updatedUser = {};
+	let updatedQuote = {};
+
+	try {
+		const user = await User.findById({ _id: userId });
+		quote = await Quote.findById(quoteId);
+		likes = user.liked;
+
+		if (updateData === 'like') {
+			// Add liked quote
+			likes.push(quoteId);
+			const userUpdated = {
+				...user,
+				liked: likes,
+			};
+			updatedUser = await User.findByIdAndUpdate(userId, userUpdated, {
+				new: true,
+			});
+
+			updatedQuote = await Quote.findByIdAndUpdate(
+				quoteId,
+				{ likeCount: quote.likeCount + 1 },
+				{ new: true }
+			);
+		} else {
+			// Delete unliked quote
+			likes = user.liked.filter((liked) => liked !== quoteId);
+			const userUpdated = {
+				...user,
+				liked: likes,
+			};
+			updatedUser = await User.findByIdAndUpdate(userId, userUpdated, {
+				new: true,
+			});
+
+			updatedQuote = await Quote.findByIdAndUpdate(
+				quoteId,
+				{ likeCount: quote.likeCount - 1 },
+				{ new: true }
+			);
+		}
+
+		res.status(201).json({
+			success: true,
+			likes,
+			updatedUser,
+			updatedQuote,
 		});
 	} catch (error) {
 		res.status(500).json({
