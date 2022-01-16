@@ -12,7 +12,7 @@
 	box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.2);
 
 	.photo {
-		display: flex;
+		display: block;
 		width: 100%;
 		padding-left: 0.5em;
 		// justify-content: center;
@@ -48,10 +48,6 @@
 		.likes {
 			display: flex;
 			flex-direction: row;
-
-			.icons-quote {
-				margin-right: 0.5em;
-			}
 
 			p {
 				@include font-size(18px, 22px);

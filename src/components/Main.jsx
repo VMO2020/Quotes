@@ -53,7 +53,6 @@ export const Main = ({
 									quote={quote}
 									liked={liked}
 									authorList={authorList}
-									setUser={setUser}
 									setDataList={setDataList}
 								/>
 							</div>
@@ -65,7 +64,6 @@ export const Main = ({
 									liked={liked}
 									quote={quote}
 									authorList={authorList}
-									setUser={setUser}
 									setDataList={setDataList}
 								/>
 							</div>

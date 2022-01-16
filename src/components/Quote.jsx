@@ -1,6 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Axios from 'axios';
 
+// Modals
+import { Modal } from '../components/Modal';
+import { Share } from '../components/Share';
 // Icons
 import { ReactComponent as IconShare } from '../assets/icons/share.svg';
 import { ReactComponent as IconCopy } from '../assets/icons/content_copy.svg';
@@ -14,17 +17,15 @@ import './quote.scss';
 
 const URL = process.env.REACT_APP_URL;
 
-export const Quote = ({
-	user,
-	liked,
-	quote,
-	authorList,
-	setUser,
-	setDataList,
-}) => {
+export const Quote = ({ user, liked, quote, authorList }) => {
 	// States
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isCreator, setIsCreator] = useState(false);
+	const [openShare, setOpenShare] = useState(false);
+	const [openMessage, setOpenMessage] = useState(false);
+	const quoteSelected = `${quote.author}: "${quote.quote}"`;
+
+	const inputRef = useRef();
 
 	const author = quote.author;
 	let photo = '';
@@ -35,34 +36,28 @@ export const Quote = ({
 	}
 
 	useEffect(() => {
-		handleRender();
 		if (user === quote.creator) {
 			setIsCreator(true);
-		}
-	}, [liked, quote._id, user]);
-
-	const handleRender = () => {
-		if (liked) {
 			const isLiked = liked.includes(quote._id);
 			if (isLiked) {
-				// console.log(quote._id);
 				setIsFavorite(true);
 			}
 		}
-	};
+	}, [liked, quote.creator, quote._id, user]);
 
 	const handleCopy = () => {
-		const content = document.querySelector('#quote').textContent;
-		console.log(content);
-		// content.current.select();
-		// content.select();
-		// document.execCommand('copy');
+		const content = inputRef.current;
+		// console.log(content);
+		content.select();
+		document.execCommand('copy');
+		setOpenMessage(true);
+		setTimeout(() => {
+			setOpenMessage(false);
+		}, 1000);
 	};
 
 	const handleShare = () => {
-		const contenido = document.querySelector('#quote').textContent;
-		console.log(`Share: ${contenido}`);
-		// copyText.select();
+		setOpenShare(true);
 	};
 
 	const handleEdit = () => {
@@ -78,6 +73,9 @@ export const Quote = ({
 		if (!user) {
 			return;
 		}
+
+		setIsFavorite(!isFavorite);
+
 		const userId = user;
 		const quoteId = quote._id;
 
@@ -106,15 +104,24 @@ export const Quote = ({
 
 	return (
 		<div className='quote_card-container'>
+			{openShare && (
+				<Modal>
+					<Share setOpenShare={setOpenShare} url={'vmog.net'} />
+				</Modal>
+			)}
 			<ul>
 				<li className='photo'>
 					<img className='image-avatar_quote' src={photo} alt={quote._id} />
-				</li>
-				<li>
 					<p className='quote'>
 						<span>&#8220;</span> <i id='quote'>{quote.quote}</i>
 						<span>&#8221;</span>
 					</p>
+					<input
+						type='text'
+						defaultValue={quoteSelected}
+						ref={inputRef}
+						style={{ opacity: 0, position: 'absolute' }}
+					></input>
 				</li>
 				<li>
 					<p id='author'>
@@ -123,11 +130,16 @@ export const Quote = ({
 				</li>
 			</ul>
 			<div className='icons-container'>
-				<button className='icons-quote' onClick={handleShare}>
-					<IconShare />
-				</button>
 				<button className='icons-quote' onClick={handleCopy}>
 					<IconCopy />
+					{openMessage && (
+						<p style={{ margin: '0 0.5em', color: 'green', fontSize: '1em' }}>
+							Copied
+						</p>
+					)}
+				</button>
+				<button className='icons-quote' onClick={handleShare}>
+					<IconShare />
 				</button>
 				{isCreator && (
 					<button className='icons-quote' onClick={handleEdit}>
@@ -140,7 +152,7 @@ export const Quote = ({
 					</button>
 				)}
 				<div className='likes'>
-					<button className='icons-quote'>
+					<button className='icons-like'>
 						{isFavorite ? (
 							<span onClick={() => handleLikes('dislike')}>
 								<IconFavoriteFull />

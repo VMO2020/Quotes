@@ -49,11 +49,11 @@ export const Author = ({ author, userAdmin }) => {
 						</a>
 					)}
 				</li>
-				<li>
+				{/* <li>
 					<p>
 						likes: <b> {author.likeCount}</b>
 					</p>
-				</li>
+				</li> */}
 				<p>Tags:</p>
 				<li className='tags'>
 					{author.tags.map((tag, index) => (

@@ -58,6 +58,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.name}
 							onChange={handleChange}
+							placeholder='Author name'
 						/>
 						{errors.name && <p className='error'>{errors.name}</p>}
 					</div>
@@ -72,6 +73,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.country}
 							onChange={handleChange}
+							placeholder='City or country of residence'
 						/>
 						{errors.country && <p className='error'>{errors.country}</p>}
 					</div>
@@ -86,6 +88,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.born}
 							onChange={handleChange}
+							placeholder='Date of birth'
 						/>
 						{errors.born && <p className='error'>{errors.born}</p>}
 					</div>
@@ -100,6 +103,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.dead}
 							onChange={handleChange}
+							placeholder='Date of death'
 						/>
 						{errors.dead && <p className='error'>{errors.dead}</p>}
 					</div>
@@ -114,6 +118,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.wiki}
 							onChange={handleChange}
+							placeholder='https://en.wikipedia.org/wiki/Author'
 						/>
 						{errors.wiki && <p className='error'>{errors.wiki}</p>}
 					</div>
@@ -128,6 +133,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.tags}
 							onChange={handleChange}
+							placeholder='Life, Philosophy, Science, ...'
 						/>
 						{errors.wiki && <p className='error'>{errors.wiki}</p>}
 					</div>

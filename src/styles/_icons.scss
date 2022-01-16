@@ -25,20 +25,29 @@
 	}
 }
 
-.icons-container {
-	display: flex;
-
-	.icons-quote {
+.quote_card-container {
+	.icons-container {
 		display: flex;
-		height: 4vh;
-		border: none;
-		margin-right: 2em;
 
-		svg {
-			@include size(20px, 24px);
-			fill: $MedLight;
-			background: $Light;
-			margin: 0;
+		.icons-quote,
+		.icons-like {
+			display: flex;
+			height: 4vh;
+			border: none;
+			margin-right: 2em;
+			cursor: pointer;
+
+			svg {
+				@include size(20px, 24px);
+				fill: $MedLight;
+				background: $Light;
+				margin: 0;
+
+				&:hover,
+				&:focus {
+					fill: $Dark;
+				}
+			}
 		}
 	}
 }

@@ -103,7 +103,7 @@ const QuoteForm = ({
 						<textarea
 							id='quote'
 							rows='8'
-							placeholder=' ✍🏽  Type or paste a quote here ...'
+							placeholder=' ✍🏽  Entry or paste a new quote here ... (Text without quotes)'
 							className={`${errors.quote && 'inputError'}`}
 							name='quote'
 							value={values.quote}
