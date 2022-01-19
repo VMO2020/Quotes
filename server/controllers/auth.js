@@ -137,15 +137,14 @@ export const updateUser = async (req, res) => {
 				{ new: true }
 			);
 		} else {
-			// Delete unliked quote
-			likes = user.liked.filter((liked) => liked !== quoteId);
-			const userUpdated = {
-				...user,
-				liked: likes,
-			};
-			updatedUser = await User.findByIdAndUpdate(userId, userUpdated, {
-				new: true,
-			});
+			// Delete unliked quote (Filter)
+			const result = likes.filter((like) => like !== quoteId);
+
+			updatedUser = await User.findByIdAndUpdate(
+				userId,
+				{ liked: result },
+				{ new: true }
+			);
 
 			updatedQuote = await Quote.findByIdAndUpdate(
 				quoteId,
@@ -156,6 +155,7 @@ export const updateUser = async (req, res) => {
 
 		res.status(201).json({
 			success: true,
+			updateData,
 			likes,
 			updatedUser,
 			updatedQuote,

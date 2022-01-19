@@ -29,6 +29,11 @@ app.use('/api/user', authRoute);
 app.use('/api/authors', autorsRoute);
 app.use('/api/quotes', quotesRoute);
 
+// 404
+app.use((req, res, next) => {
+	res.status(404).send('404 Not found');
+});
+
 mongoose
 	.connect(CONNECTION_URL)
 	.then(() => {

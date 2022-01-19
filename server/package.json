@@ -9,7 +9,7 @@
     "server": "nodemon index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "vmog.net",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

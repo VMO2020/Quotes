@@ -18,6 +18,6 @@ router.post('/register', registerQuote);
 router.patch('/update', updateQuote);
 
 // /api/quotes/delete
-router.patch('/delete', deleteQuote);
+router.delete('/delete/:id', deleteQuote);
 
 export default router;

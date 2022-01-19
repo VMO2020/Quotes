@@ -51,4 +51,27 @@ export const registerQuote = async (req, res) => {
 export const updateQuote = async (req, res) => {};
 
 // DELETE
-export const deleteQuote = async (req, res) => {};
+export const deleteQuote = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		// Checking if the quote is already in the database
+		const quoteExist = await Quote.findOne({ _id: id });
+		if (!quoteExist)
+			return res.status(404).send({
+				success: false,
+				error: `No quote with id: ${id}}`,
+			});
+		// Delete Quote
+		await Quote.findByIdAndRemove(id);
+		res.status(201).json({
+			success: true,
+			message: `Quote ${id} deleted successfully.`,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
