@@ -1,6 +1,4 @@
-@import '../styles/styles.scss';
-
-footer {
+.components_footer-container {
 	@include font-size(16px, 28px);
 	display: flex;
 	justify-content: center;

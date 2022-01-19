@@ -6,25 +6,25 @@ import { Quote } from '../components/Quote';
 // Services
 import { GetQuotes } from '../services/getData';
 
-// Styles
-import './main.scss';
-
 export const Main = ({
 	user,
 	liked,
 	dataList,
+	renderHome,
 	authorList,
 	AuthorFiltered,
-	setUser,
 	setDataList,
+	setOpenLogin,
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	const [renderMain, setRenderMain] = useState(false);
 
 	useEffect(() => {
 		setLoading(true);
 		GetQuotes({ setDataList, setLoading, setError });
-	}, [setDataList]);
+		setRenderMain(false);
+	}, [setDataList, renderMain, renderHome]);
 
 	useEffect(() => {
 		backToTop();
@@ -39,7 +39,7 @@ export const Main = ({
 	};
 
 	return (
-		<div className='main_home'>
+		<div className='components_main'>
 			<div id='top'></div>
 			{error && <h2 className='center'>{error}</h2>}
 			{loading && <h3 style={{ color: 'red' }}>Loading...</h3>}
@@ -53,7 +53,9 @@ export const Main = ({
 									quote={quote}
 									liked={liked}
 									authorList={authorList}
+									setRenderMain={setRenderMain}
 									setDataList={setDataList}
+									setOpenLogin={setOpenLogin}
 								/>
 							</div>
 					  ))
@@ -64,7 +66,9 @@ export const Main = ({
 									liked={liked}
 									quote={quote}
 									authorList={authorList}
+									setRenderMain={setRenderMain}
 									setDataList={setDataList}
+									setOpenLogin={setOpenLogin}
 								/>
 							</div>
 					  ))}

@@ -15,7 +15,7 @@ export const Photo = ({ handlePhoto }) => {
 	const handelInput = (base64, size, type, file) => {
 		setSizePhoto(size);
 		setTypePhoto(type);
-		// console.log(file);
+		// console.log(base64);
 
 		// Validate type (jpg, jpeg & png) & image size:
 		const isNameOfOneImageRegEx = /.(jpe?g|png)$/i;

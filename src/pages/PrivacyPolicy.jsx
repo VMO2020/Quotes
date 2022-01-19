@@ -127,7 +127,7 @@ export const PrivacyPolicy = () => {
 				</p>
 				<ScrollBackToTop />
 			</main>
-			<footer className='footer'>
+			<footer className='components_footer-container'>
 				<Footer active={'privacy'} />
 			</footer>
 		</div>

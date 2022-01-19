@@ -3,10 +3,11 @@ import Axios from 'axios';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateLogin';
 
+// services
+import { PostlLogin } from '../services/postData';
+
 // helpers
 import { setLocalStoreValue } from '../helpers/LocalStore';
-
-// TODO: scss styles
 
 const LoginForm = ({
 	setUser,
@@ -14,6 +15,7 @@ const LoginForm = ({
 	setLiked,
 	setUserAdmin,
 	setOpenLogin,
+	setRenderHome,
 	setOpenRegister,
 }) => {
 	const initialForm = {
@@ -71,6 +73,7 @@ const LoginForm = ({
 		await setUserAdmin(data.data.ua);
 		await setAvatar(data.data.photo);
 		await setLiked(data.data.liked);
+		await setRenderHome(true);
 	};
 
 	const opendRegisterForm = () => {
@@ -80,7 +83,12 @@ const LoginForm = ({
 
 	return (
 		<>
-			<form className='form' onSubmit={handleSubmit} noValidate id='loginform'>
+			<form
+				className='elements_form'
+				onSubmit={handleSubmit}
+				noValidate
+				id='loginform'
+			>
 				<h2>LOGIN</h2>
 				<hr />
 				<span onClick={() => setOpenLogin(false)}>X</span>

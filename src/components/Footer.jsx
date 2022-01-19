@@ -4,13 +4,10 @@ import { Link } from 'react-router-dom';
 // Services
 import AuthContextProvider from '../context/AuthContext';
 
-// Styles
-import './footer.scss';
-
 export const Footer = ({ active }) => {
 	const { userAdmin } = useContext(AuthContextProvider);
 	return (
-		<div className='footer'>
+		<div>
 			<Link to='/' style={{ textDecoration: 'none' }}>
 				<span className={active === 'quotes' ? 'active' : 'link'}>Quotes</span>
 			</Link>

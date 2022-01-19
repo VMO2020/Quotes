@@ -100,7 +100,7 @@ export const CookiePolicy = () => {
 				</p>
 				<ScrollBackToTop />
 			</main>
-			<footer className='footer'>
+			<footer className='components_footer-container'>
 				<Footer active={'cookies'} />
 			</footer>
 		</div>

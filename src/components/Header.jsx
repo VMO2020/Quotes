@@ -7,9 +7,6 @@ import { clearLocalStoreValue } from '../helpers/LocalStore';
 import { ReactComponent as IconFace } from '../assets/icons/face.svg';
 import { ReactComponent as IconShare } from '../assets/icons/share.svg';
 
-// Styles
-import './header.scss';
-
 // Read JSON Data
 const geninfo = require('../data/geninfo.json').data;
 
@@ -69,7 +66,7 @@ export const Header = ({
 
 	return (
 		<div>
-			<div className='header__line line1'>
+			<div className='component_header-line line1'>
 				<h3>
 					<a
 						className='logo'
@@ -102,7 +99,7 @@ export const Header = ({
 					)}
 				</div>
 			</div>
-			<div className='header__line line2'>
+			<div className='component_header-line line2'>
 				<div className='line-items'>
 					<select
 						id='author'

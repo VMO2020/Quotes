@@ -12,9 +12,6 @@ import AuthorContextProvider from '../context/AuthorContext';
 // Icons
 import { ReactComponent as Home } from '../assets/icons/home.svg';
 
-// Styles
-import './authors.scss';
-
 export const Authors = () => {
 	const { userAdmin } = useContext(AuthContextProvider);
 	const { authorList } = useContext(AuthorContextProvider);
@@ -24,7 +21,7 @@ export const Authors = () => {
 	};
 
 	return (
-		<div className='authors'>
+		<div className='pages-container'>
 			<header>
 				AUTHORS
 				<Link to='/' style={{ textDecoration: 'none' }}>
@@ -41,12 +38,12 @@ export const Authors = () => {
 						<Author key={author._id} author={author} userAdmin={userAdmin} />
 					))}
 				</div>
-				<button className='btn' onClick={() => backToTop()}>
+				<button className='btn btn-top' onClick={() => backToTop()}>
 					Back to top
 				</button>
 			</main>
 
-			<footer className='footer'>
+			<footer className='components_footer-container'>
 				<Footer userAdmin={userAdmin} active={'authors'} />
 			</footer>
 		</div>

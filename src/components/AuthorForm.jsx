@@ -8,9 +8,7 @@ import { Photo } from '../components/Photo';
 // services
 import { PostAuthors } from '../services/postData';
 
-// TODO: scss styles
-
-const AuthorForm = ({ user, setOpenAuthorRegister }) => {
+const AuthorForm = ({ user, setOpenAuthorRegister, setRenderHome }) => {
 	const initialForm = {
 		name: '',
 		country: '',
@@ -28,15 +26,13 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 		useForm(submit, validate, initialForm);
 
 	function submit() {
-		PostAuthors({ values, handleData, setserverError });
+		PostAuthors({ values, setserverError }).then(() => {
+			reset();
+			closeAuthorForm();
+			setserverError('');
+			setRenderHome(true);
+		});
 	}
-
-	const handleData = async (data) => {
-		reset();
-		setserverError('');
-		closeAuthorForm();
-		// console.log(data);
-	};
 
 	const closeAuthorForm = () => {
 		setOpenAuthorRegister(false);
@@ -44,7 +40,12 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 
 	return (
 		<>
-			<form className='form' onSubmit={handleSubmit} noValidate id='loginform'>
+			<form
+				className='elements_form'
+				onSubmit={handleSubmit}
+				noValidate
+				id='loginform'
+			>
 				<h2>Author REGISTER</h2>
 				<span onClick={closeAuthorForm}>X</span>
 				<hr />
@@ -118,7 +119,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister }) => {
 							type='text'
 							value={values.wiki}
 							onChange={handleChange}
-							placeholder='https://en.wikipedia.org/wiki/Author'
+							placeholder='https://en.wikipedia.org....'
 						/>
 						{errors.wiki && <p className='error'>{errors.wiki}</p>}
 					</div>

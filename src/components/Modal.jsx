@@ -1,9 +1,6 @@
 import { useEffect } from 'react';
 import reactDOM from 'react-dom';
 
-// Styles
-import './modal.scss';
-
 export const Modal = ({ children }) => {
 	// Create a new 'div'
 	const portalNode = document.createElement('div');

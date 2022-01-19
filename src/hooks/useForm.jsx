@@ -19,6 +19,18 @@ const useForm = (callback, validate, initialForm) => {
 		});
 	};
 
+	const handleValue = (name, value, error) => {
+		if (value) {
+			setValues({
+				...values,
+				[name]: value,
+			});
+		}
+		if (!error) {
+			setErrors('');
+		}
+	};
+
 	const handlePhoto = (base64, name) => {
 		// console.log(base64);
 		if (base64) {
@@ -66,6 +78,8 @@ const useForm = (callback, validate, initialForm) => {
 		handleSubmit,
 		handleSelector,
 		handleAllChecked,
+		handleValue,
+		setValues,
 		values,
 		errors,
 		reset,

@@ -1,11 +1,8 @@
 import React from 'react';
 
-// Styles
-import './user.scss';
-
 export const User = ({ user }) => {
 	return (
-		<div className='card-container-user'>
+		<div className='elements_card-container'>
 			<ul>
 				{user.photo && (
 					<li className='photo'>
@@ -13,7 +10,7 @@ export const User = ({ user }) => {
 					</li>
 				)}
 				<li>
-					<p className='user-id'>
+					<p className='card-id'>
 						id: <b>{user._id}</b>
 					</p>
 				</li>

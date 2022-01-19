@@ -1,9 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
+
+// General
 @import '../styles/variables';
 @import '../styles/mixins';
-@import '../styles/buttons';
-@import '../styles/forms';
 @import '../styles/reset';
-@import '../styles/icons';
-@import '../styles/policy';
-@import '../styles/images';
+
+// Elements
+@import '../styles/elements/buttons';
+@import '../styles/elements/forms';
+@import '../styles/elements/icons';
+@import '../styles/elements/images';
+@import '../styles/elements/card';
+
+// pages
+@import '../styles/pages/policy';
+@import '../styles/pages/pages';
+@import '../styles/pages/home';
+
+// components
+@import '../styles/components/share';
+@import '../styles/components/quote';
+@import '../styles/components/modal';
+@import '../styles/components/main';
+@import '../styles/components/header';
+@import '../styles/components/footer';

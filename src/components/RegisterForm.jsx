@@ -8,9 +8,7 @@ import { Photo } from '../components/Photo';
 //services
 import { PostUser } from '../services/postData';
 
-// TODO: scss styles
-
-const RegisterForm = ({ setOpenRegister, setUser }) => {
+const RegisterForm = ({ setOpenRegister, setUser, setRenderHome }) => {
 	const initialForm = {
 		name: '',
 		nickname: '',
@@ -34,6 +32,7 @@ const RegisterForm = ({ setOpenRegister, setUser }) => {
 		setserverError('');
 		setOpenRegister(false);
 		await setUser(data.data.user);
+		await setRenderHome(true);
 	};
 
 	const closeRegisterForm = () => {
@@ -42,7 +41,7 @@ const RegisterForm = ({ setOpenRegister, setUser }) => {
 
 	return (
 		<>
-			<form className='form' onSubmit={handleSubmit} noValidate>
+			<form className='elements_form' onSubmit={handleSubmit} noValidate>
 				<h2>User REGISTER</h2>
 				<span onClick={closeRegisterForm}>X</span>
 				<hr />
@@ -117,7 +116,7 @@ const RegisterForm = ({ setOpenRegister, setUser }) => {
 				</div>
 				<div className='form-item'>
 					<Photo handlePhoto={handlePhoto} />
-					{serverError && <p className='error'>{serverError}</p>}
+					{serverError && <p className='error server-error'>{serverError}</p>}
 				</div>
 				<div className='btn-container'>
 					<button type='submit' className='btn'>

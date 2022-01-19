@@ -1,6 +1,4 @@
-@import '../styles/styles.scss';
-
-.header__line {
+.component_header-line {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -81,7 +79,7 @@
 
 // Desktop Size
 @media only screen and (min-width: $maxWidth) {
-	.header__line {
+	.component_header-line {
 		height: 6vh;
 
 		.line-items {

@@ -1,11 +1,8 @@
 import React from 'react';
 
-// Styles
-import './author.scss';
-
 export const Author = ({ author, userAdmin }) => {
 	return (
-		<div className='author_card-container'>
+		<div className='elements_card-container'>
 			<ul>
 				{author.photo && (
 					<li className='photo'>

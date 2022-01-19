@@ -5,7 +5,8 @@ import { setLocalStoreValue } from '../helpers/LocalStore';
 
 const URL = process.env.REACT_APP_URL;
 
-export const PostAuthors = async ({ values, handleData, setserverError }) => {
+// AUTHORS
+export const PostAuthors = async ({ values, setserverError }) => {
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -28,12 +29,11 @@ export const PostAuthors = async ({ values, handleData, setserverError }) => {
 			config
 		);
 
-		return handleData(data);
+		console.log(data.data);
+		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);
-		setserverError(
-			`Invalid format, choose another file: ${error.response.data.error}`
-		);
+		setserverError(error.response.data.error);
 		setTimeout(() => {
 			setserverError('');
 		}, 5000);
@@ -61,15 +61,47 @@ export const PostUser = async ({ values, handleData, setserverError }) => {
 			config
 		);
 
+		console.log(data.data);
 		setLocalStoreValue('auth-ID', data.data.user);
 		return handleData(data);
 	} catch (error) {
 		console.log(error.response.data.error);
-		setserverError(
-			`Invalid format, choose another file: ${error.response.data.error}`
-		);
+		setserverError(error.response.data.error);
 		setTimeout(() => {
 			setserverError('');
 		}, 5000);
 	}
 };
+
+// QUOTES
+export const PostQuote = async ({ postValues, setserverError }) => {
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const data = await Axios.post(
+			`${URL}/api/quotes/register`,
+			{
+				author: postValues.author,
+				quote: postValues.quote,
+				creator: postValues.creator,
+			},
+			config
+		);
+
+		console.log(data.data);
+		return data.data;
+	} catch (error) {
+		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+		setTimeout(() => {
+			setserverError('');
+		}, 5000);
+	}
+};
+
+// LOGIN
+export const PostLogin = async () => {};

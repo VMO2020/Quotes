@@ -22,12 +22,10 @@ import QuotesContextProvider from '../context/QuotesContext';
 // helpers
 import { getLocalStoreValue } from '../helpers/LocalStore';
 
-// Styles
-import './home.scss';
-
 const Home = () => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
+	const [renderHome, setRenderHome] = useState(false);
 
 	// Open states
 	const [openLogin, setOpenLogin] = useState(false);
@@ -51,7 +49,9 @@ const Home = () => {
 		}
 		// Service Authors
 		GetAuthors({ setAuthorList, setLoading, setError });
-	}, []);
+		// Render
+		setRenderHome(false);
+	}, [renderHome, setAuthorList, setUser]);
 
 	return (
 		<div className='home-container'>
@@ -61,6 +61,7 @@ const Home = () => {
 						setUser={setUser}
 						setAvatar={setAvatar}
 						setLiked={setLiked}
+						setRenderHome={setRenderHome}
 						setUserAdmin={setUserAdmin}
 						setOpenLogin={setOpenLogin}
 						setOpenRegister={setOpenRegister}
@@ -69,13 +70,18 @@ const Home = () => {
 			)}
 			{openRegister && (
 				<Modal>
-					<RegisterForm setUser={setUser} setOpenRegister={setOpenRegister} />
+					<RegisterForm
+						setUser={setUser}
+						setRenderHome={setRenderHome}
+						setOpenRegister={setOpenRegister}
+					/>
 				</Modal>
 			)}
 			{openAuthorRegister && (
 				<Modal>
 					<AuthorForm
 						user={user}
+						setRenderHome={setRenderHome}
 						setOpenAuthorRegister={setOpenAuthorRegister}
 					/>
 				</Modal>
@@ -85,7 +91,8 @@ const Home = () => {
 					<QuoteForm
 						user={user}
 						authorList={authorList}
-						setOpenRegister={setOpenRegister}
+						setRenderHome={setRenderHome}
+						setOpenAuthorRegister={setOpenAuthorRegister}
 						setOpenQuoteRegister={setOpenQuoteRegister}
 					/>
 				</Modal>
@@ -118,14 +125,15 @@ const Home = () => {
 					user={user}
 					liked={liked}
 					dataList={dataList}
+					renderHome={renderHome}
 					authorList={authorList}
 					AuthorFiltered={AuthorFiltered}
-					setUser={setUser}
 					setDataList={setDataList}
+					setOpenLogin={setOpenLogin}
 				/>
 			</main>
 
-			<footer className='footer'>
+			<footer className='components_footer-container'>
 				<Footer active={'quotes'} />
 			</footer>
 		</div>

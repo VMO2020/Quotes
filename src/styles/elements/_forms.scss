@@ -45,10 +45,16 @@ form {
 			margin: 0;
 			@include font-size(12px, 18px);
 			font-style: italic;
+			font-family: Arial, Helvetica, sans-serif;
+			font-weight: bold;
 			color: $Danger;
 		}
 		.inputError {
 			border: 1px solid $Danger;
+		}
+		.server-error {
+			@include font-size(13px, 21px);
+			text-align: center;
 		}
 		input {
 			border: 2px solid $ExtraLight;
@@ -68,6 +74,22 @@ form {
 		}
 	}
 
+	.form-textarea {
+		display: flex;
+		position: relative;
+
+		p {
+			@include font-size(22px, 30px);
+			font-family: italic;
+
+			&.form-textarea-botom {
+				position: absolute;
+				right: -0.5em;
+				bottom: -0.6em;
+			}
+		}
+	}
+
 	.btn-container {
 		display: flex;
 		justify-content: space-around;
@@ -80,5 +102,12 @@ form {
 			color: $mainColor;
 			background: $Light;
 		}
+	}
+
+	.icons-container {
+		display: flex;
+		width: 100%;
+		margin-top: 0.8em;
+		margin-left: 2em;
 	}
 }

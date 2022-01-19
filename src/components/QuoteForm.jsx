@@ -1,14 +1,18 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateQuote';
 
-// TODO: scss styles
+// Services
+import { PostQuote } from '../services/postData';
+
+// Icons
+import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
 
 const QuoteForm = ({
 	user,
 	authorList,
-	setOpenRegister,
+	setRenderHome,
+	setOpenAuthorRegister,
 	setOpenQuoteRegister,
 }) => {
 	const initialForm = {
@@ -19,47 +23,39 @@ const QuoteForm = ({
 
 	const [serverError, setserverError] = useState('');
 
-	const { handleChange, handleSubmit, handleSelector, values, errors, reset } =
-		useForm(submit, validate, initialForm);
+	const {
+		handleChange,
+		handleSubmit,
+		handleSelector,
+		handleValue,
+		values,
+		errors,
+		reset,
+	} = useForm(submit, validate, initialForm);
+
+	const handelPasteButton = () => {
+		let text = '';
+		let error = false; // false to bypass validate
+		// Read clipboard and write text to textarea
+		navigator.clipboard.readText(text).then((text) => {
+			handleValue('quote', text, error);
+		});
+	};
 
 	function submit() {
-		handleQuote();
-	}
-
-	const handleQuote = async () => {
-		const URL = process.env.REACT_APP_URL;
-		const config = {
-			header: {
-				'Content-Type': 'application/json',
-			},
+		const postValues = {
+			author: values.author,
+			quote: values.quote,
+			creator: values.creator,
 		};
 
-		try {
-			const data = await Axios.post(
-				`${URL}/api/quotes/register`,
-				{
-					author: values.author,
-					quote: values.quote,
-					creator: values.creator,
-				},
-				config
-			);
-
-			return handleData(data);
-		} catch (error) {
-			console.log(error.response.data.error);
-			setserverError(error.response.data.error);
-			setTimeout(() => {
-				setserverError('');
-			}, 5000);
-		}
-	};
-
-	const handleData = async (data) => {
-		reset();
-		setserverError('');
-		setOpenQuoteRegister(false);
-	};
+		PostQuote({ postValues, setserverError }).then(() => {
+			reset();
+			setserverError('');
+			setOpenQuoteRegister(false);
+			setRenderHome(true);
+		});
+	}
 
 	const closeQuoteForm = () => {
 		setOpenQuoteRegister(false);
@@ -67,12 +63,12 @@ const QuoteForm = ({
 
 	const handleRegisterForm = () => {
 		setOpenQuoteRegister(false);
-		setOpenRegister(true);
+		setOpenAuthorRegister(true);
 	};
 
 	return (
 		<>
-			<form className='form' onSubmit={handleSubmit} noValidate>
+			<form className='elements_form' onSubmit={handleSubmit} noValidate>
 				<h2>Quote REGISTER</h2>
 				<span onClick={closeQuoteForm}>X</span>
 				<hr />
@@ -99,22 +95,33 @@ const QuoteForm = ({
 				</div>
 				<div className='form-item'>
 					<label>Quote:</label>
-					<div>
+					<div className='form-textarea'>
+						<p className='form-textarea-top'>"</p>
 						<textarea
-							id='quote'
+							id='pasteArea'
 							rows='8'
-							placeholder=' ✍🏽  Entry or paste a new quote here ... (Text without quotes)'
+							placeholder='Entry or paste a new quote here ... (Text without quotes)'
 							className={`${errors.quote && 'inputError'}`}
 							name='quote'
 							value={values.quote}
 							onChange={handleChange}
 						/>
-						{errors.quote && <p className='error'>{errors.quote}</p>}
+						<p className='form-textarea-botom'>"</p>
 					</div>
+					{errors.quote && (
+						<p className='error' style={{ margin: '1em' }}>
+							{errors.quote}
+						</p>
+					)}
 				</div>
 
 				<div className='form-item'>
 					{serverError && <p className='error'>{serverError}</p>}
+				</div>
+				<div className='icons-container'>
+					<button className='icons-quote' onClick={() => handelPasteButton()}>
+						<IconPaste />
+					</button>
 				</div>
 				<div className='btn-container'>
 					<button type='submit' className='btn'>
