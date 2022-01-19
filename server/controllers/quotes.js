@@ -48,7 +48,29 @@ export const registerQuote = async (req, res) => {
 };
 
 // UPDATE
-export const updateQuote = async (req, res) => {};
+export const updateQuote = async (req, res) => {
+	const { quoteId, quoteEdited } = req.body;
+
+	try {
+		const updatedQuote = await Quote.findByIdAndUpdate(
+			quoteId,
+			{ quote: quoteEdited },
+			{ new: true }
+		);
+
+		res.status(201).json({
+			success: true,
+			quoteId,
+			quoteEdited,
+			updatedQuote,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
 
 // DELETE
 export const deleteQuote = async (req, res) => {
