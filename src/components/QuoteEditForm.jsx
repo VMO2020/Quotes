@@ -11,7 +11,7 @@ import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
 export const QuoteEditForm = ({
 	author,
 	quote,
-	setRenderMain,
+	setQuoteEdited,
 	setOpenEdit,
 }) => {
 	const initialForm = {
@@ -30,7 +30,7 @@ export const QuoteEditForm = ({
 			reset();
 			setserverError('');
 			setOpenEdit(false);
-			setRenderMain(true);
+			setQuoteEdited(values.quote);
 		});
 	}
 

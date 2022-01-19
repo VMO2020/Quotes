@@ -26,6 +26,7 @@ export const Quote = ({
 	setRenderMain,
 }) => {
 	// States
+	const [quoteEdited, setQuoteEdited] = useState('');
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isCreator, setIsCreator] = useState(false);
 	const [likesCount, setLikesCount] = useState(quote.likeCount);
@@ -121,8 +122,8 @@ export const Quote = ({
 						author={author}
 						quote={quote}
 						authorList={authorList}
-						setRenderMain={setRenderMain}
 						setOpenEdit={setOpenEdit}
+						setQuoteEdited={setQuoteEdited}
 					/>
 				</Modal>
 			)}
@@ -132,7 +133,8 @@ export const Quote = ({
 						<img className='image-avatar_quote' src={photo} alt={quote._id} />
 					)}
 					<p className='quote'>
-						<span>&#8220;</span> <i id='quote'>{quote.quote}</i>
+						<span>&#8220;</span>{' '}
+						<i id='quote'>{quoteEdited ? quoteEdited : quote.quote}</i>
 						<span>&#8221;</span>
 					</p>
 					<input
