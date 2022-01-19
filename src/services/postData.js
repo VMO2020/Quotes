@@ -40,8 +40,8 @@ export const PostAuthors = async ({ values, setserverError }) => {
 	}
 };
 
+// USERS
 export const PostUser = async ({ values, handleData, setserverError }) => {
-	const URL = process.env.REACT_APP_URL;
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export const PostUser = async ({ values, handleData, setserverError }) => {
 };
 
 // QUOTES
-export const PostQuote = async ({ postValues, setserverError }) => {
+export const PostQuote = async ({ values, setserverError }) => {
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -85,9 +85,9 @@ export const PostQuote = async ({ postValues, setserverError }) => {
 		const data = await Axios.post(
 			`${URL}/api/quotes/register`,
 			{
-				author: postValues.author,
-				quote: postValues.quote,
-				creator: postValues.creator,
+				author: values.author,
+				quote: values.quote,
+				creator: values.creator,
 			},
 			config
 		);
@@ -104,4 +104,31 @@ export const PostQuote = async ({ postValues, setserverError }) => {
 };
 
 // LOGIN
-export const PostLogin = async () => {};
+export const PostLogin = async ({ values, handleData, setserverError }) => {
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const data = await Axios.post(
+			`${URL}/api/user/login`,
+			{
+				email: values.email,
+				password: values.password,
+			},
+			config
+		);
+
+		console.log(data.data);
+		setLocalStoreValue('auth-ID', data.data.user);
+		return handleData(data);
+	} catch (error) {
+		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+		setTimeout(() => {
+			setserverError('');
+		}, 5000);
+	}
+};

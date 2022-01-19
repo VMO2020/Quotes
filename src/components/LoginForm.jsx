@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import Axios from 'axios';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateLogin';
 
 // services
-import { PostlLogin } from '../services/postData';
-
-// helpers
-import { setLocalStoreValue } from '../helpers/LocalStore';
+import { PostLogin } from '../services/postData';
 
 const LoginForm = ({
 	setUser,
@@ -32,38 +28,8 @@ const LoginForm = ({
 	);
 
 	function submit() {
-		handelLogin();
+		PostLogin({ values, handleData, setserverError });
 	}
-
-	const handelLogin = async () => {
-		const URL = process.env.REACT_APP_URL;
-		const config = {
-			header: {
-				'Content-Type': 'application/json',
-			},
-		};
-
-		try {
-			const data = await Axios.post(
-				`${URL}/api/user/login`,
-				{
-					email: values.email,
-					password: values.password,
-					liked: values.liked,
-				},
-				config
-			);
-			// console.log('user: ' + data.data.user);
-			setLocalStoreValue('auth-ID', data.data.user);
-			return handleData(data);
-		} catch (error) {
-			console.log(error.response.data.error);
-			setserverError(error.response.data.error);
-			setTimeout(() => {
-				setserverError('');
-			}, 5000);
-		}
-	};
 
 	const handleData = async (data) => {
 		reset();

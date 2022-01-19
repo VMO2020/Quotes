@@ -46,7 +46,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister, setRenderHome }) => {
 				noValidate
 				id='loginform'
 			>
-				<h2>Author REGISTER</h2>
+				<h2>REGISTER Author</h2>
 				<span onClick={closeAuthorForm}>X</span>
 				<hr />
 				<div className='form-item'>

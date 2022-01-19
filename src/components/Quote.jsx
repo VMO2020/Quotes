@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 // Modals
 import { Modal } from '../components/Modal';
 import { Share } from '../components/Share';
+import { QuoteEditForm } from '../components/QuoteEditForm';
 
 // services
 import { DeleteQuote } from '../services/deleteData';
@@ -27,9 +28,10 @@ export const Quote = ({
 	// States
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isCreator, setIsCreator] = useState(false);
-	const [openShare, setOpenShare] = useState(false);
-	const [openMessage, setOpenMessage] = useState(false);
 	const [likesCount, setLikesCount] = useState(quote.likeCount);
+	const [openShare, setOpenShare] = useState(false);
+	const [openEdit, setOpenEdit] = useState(false);
+	const [openMessage, setOpenMessage] = useState(false);
 
 	const quoteSelected = `${quote.author}: "${quote.quote}"`;
 
@@ -71,7 +73,7 @@ export const Quote = ({
 	};
 
 	const handleEdit = () => {
-		console.log('Edit');
+		setOpenEdit(true);
 	};
 
 	const handleDelete = async () => {
@@ -109,6 +111,18 @@ export const Quote = ({
 						setOpenShare={setOpenShare}
 						url={'vmog.net'}
 						message={'Quote copied to clipboard!'}
+					/>
+				</Modal>
+			)}
+			{openEdit && (
+				<Modal>
+					<QuoteEditForm
+						user={user}
+						author={author}
+						quote={quote}
+						authorList={authorList}
+						setRenderMain={setRenderMain}
+						setOpenEdit={setOpenEdit}
 					/>
 				</Modal>
 			)}

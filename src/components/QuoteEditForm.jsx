@@ -3,35 +3,36 @@ import useForm from '../hooks/useForm';
 import validate from '../hooks/validateQuote';
 
 // Services
-import { PostQuote } from '../services/postData';
+import { EditQuote } from '../services/patchData';
 
 // Icons
 import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
 
-const QuoteForm = ({
-	user,
-	authorList,
-	setRenderHome,
-	setOpenAuthorRegister,
-	setOpenQuoteRegister,
+export const QuoteEditForm = ({
+	author,
+	quote,
+	setRenderMain,
+	setOpenEdit,
 }) => {
 	const initialForm = {
-		author: '',
-		quote: '',
-		creator: user,
+		quoteId: quote._id,
+		quote: quote.quote,
 	};
 
 	const [serverError, setserverError] = useState('');
 
-	const {
-		handleChange,
-		handleSubmit,
-		handleSelector,
-		handleValue,
-		values,
-		errors,
-		reset,
-	} = useForm(submit, validate, initialForm);
+	const { handleChange, handleSubmit, handleValue, values, errors, reset } =
+		useForm(submit, validate, initialForm);
+
+	function submit() {
+		// Make a PATH (Update) request to the API
+		EditQuote({ values, setserverError }).then(() => {
+			reset();
+			setserverError('');
+			setOpenEdit(false);
+			setRenderMain(true);
+		});
+	}
 
 	const handelPasteButton = () => {
 		let text = '';
@@ -42,51 +43,23 @@ const QuoteForm = ({
 		});
 	};
 
-	function submit() {
-		PostQuote({ values, setserverError }).then(() => {
-			reset();
-			setserverError('');
-			setOpenQuoteRegister(false);
-			setRenderHome(true);
-		});
-	}
-
 	const closeQuoteForm = () => {
-		setOpenQuoteRegister(false);
-	};
-
-	const handleRegisterForm = () => {
-		setOpenQuoteRegister(false);
-		setOpenAuthorRegister(true);
+		setOpenEdit(false);
 	};
 
 	return (
 		<>
 			<form className='elements_form' onSubmit={handleSubmit} noValidate>
-				<h2>REGISTER Quote</h2>
+				<h2>EDIT Quote</h2>
 				<span onClick={closeQuoteForm}>X</span>
 				<hr />
 				<div className='form-item'>
-					<label>Author: </label>
-					<select
-						id='author'
-						name='author'
-						onChange={(e) => handleSelector(e.target.value, 'author')}
-					>
-						<option value='all'>Select author</option>
-						{authorList.map((name) => (
-							<option key={name._id} value={name.name}>
-								{name.name}
-							</option>
-						))}
-					</select>
-					{errors.author && <p className='error'>{errors.author}</p>}
+					<div className='inline-text'>
+						<h4>Author:</h4>
+						<h3>{author}</h3>
+					</div>
 				</div>
-				<div className='form-item'>
-					<button className='btn btn-small' onClick={handleRegisterForm}>
-						Register new Author
-					</button>
-				</div>
+
 				<div className='form-item'>
 					<label>Quote:</label>
 					<div className='form-textarea'>
@@ -117,6 +90,7 @@ const QuoteForm = ({
 						<IconPaste />
 					</button>
 				</div>
+
 				<div className='btn-container'>
 					<button type='submit' className='btn'>
 						Submit
@@ -126,5 +100,3 @@ const QuoteForm = ({
 		</>
 	);
 };
-
-export default QuoteForm;

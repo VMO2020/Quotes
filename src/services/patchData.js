@@ -2,6 +2,7 @@ import Axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
 
+// UPDATE QUOTE LIKES
 export const UpdateQuoteLikes = async ({
 	userId,
 	quoteId,
@@ -28,5 +29,33 @@ export const UpdateQuoteLikes = async ({
 		await setLikesCount(data.data.updatedQuote.likeCount);
 	} catch (error) {
 		console.log(error.response.data.error);
+	}
+};
+
+// UPDATE QUOTE
+export const EditQuote = async ({ values, setserverError }) => {
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+	// console.log('Values: ', values);
+	try {
+		const data = await Axios.patch(
+			`${URL}/api/quotes/update`,
+			{
+				quoteId: values.quoteId,
+				quoteEdited: values.quote,
+			},
+			config
+		);
+
+		console.log(data.data);
+	} catch (error) {
+		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+		setTimeout(() => {
+			setserverError('');
+		}, 5000);
 	}
 };

@@ -42,7 +42,7 @@ const RegisterForm = ({ setOpenRegister, setUser, setRenderHome }) => {
 	return (
 		<>
 			<form className='elements_form' onSubmit={handleSubmit} noValidate>
-				<h2>User REGISTER</h2>
+				<h2>REGISTER User</h2>
 				<span onClick={closeRegisterForm}>X</span>
 				<hr />
 				<div className='form-item'>
