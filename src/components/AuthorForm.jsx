@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateAuthor';
 
-// components
+// Components
 import { Photo } from '../components/Photo';
 
-// services
+// Services
 import { PostAuthors } from '../services/postData';
 
-const AuthorForm = ({ user, setOpenAuthorRegister, setRenderHome }) => {
+// Icons
+import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+
+const AuthorForm = ({ user, setOpenAuthorForm, setRenderHome }) => {
 	const initialForm = {
 		name: '',
 		country: '',
@@ -35,7 +38,7 @@ const AuthorForm = ({ user, setOpenAuthorRegister, setRenderHome }) => {
 	}
 
 	const closeAuthorForm = () => {
-		setOpenAuthorRegister(false);
+		setOpenAuthorForm(false);
 	};
 
 	return (
@@ -46,9 +49,11 @@ const AuthorForm = ({ user, setOpenAuthorRegister, setRenderHome }) => {
 				noValidate
 				id='loginform'
 			>
+				<span className='icon-close' onClick={closeAuthorForm}>
+					<Close />
+				</span>
 				<h2>REGISTER Author</h2>
-				<span onClick={closeAuthorForm}>X</span>
-				<hr />
+				{/* <hr /> */}
 				<div className='form-item'>
 					<label>Name:</label>
 					<div>

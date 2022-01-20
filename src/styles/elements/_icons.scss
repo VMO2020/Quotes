@@ -15,12 +15,14 @@
 }
 
 .icon-close {
-	display: flex;
+	position: absolute;
 	height: 5vh;
+	top: 0.5em;
+	right: 0.5em;
 
 	svg {
 		@include size(22px, 28px);
-		fill: $Dark;
+		fill: $mainColor;
 		margin: auto;
 	}
 }

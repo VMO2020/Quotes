@@ -12,7 +12,8 @@ form {
 	h2 {
 		text-align: center;
 		color: $mainColor;
-		margin-top: 0.5em;
+		margin-top: 1.5em;
+		margin-bottom: 1em;
 	}
 
 	.inline-text {
@@ -21,21 +22,6 @@ form {
 		h4 {
 			margin-right: 0.5em;
 		}
-	}
-
-	span {
-		position: absolute;
-		color: $mainColor;
-		font-size: 1em;
-		font-weight: bold;
-		width: 30px;
-		height: 30px;
-		text-align: center;
-		line-height: 30px;
-		top: 0;
-		right: 0;
-		cursor: pointer;
-		// border: 2px solid red;
 	}
 
 	.form-item {

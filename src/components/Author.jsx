@@ -5,8 +5,12 @@ export const Author = ({ author, userAdmin }) => {
 		<div className='elements_card-container'>
 			<ul>
 				{author.photo && (
-					<li className='photo'>
-						<img src={author.photo} alt='author' />
+					<li>
+						<img
+							className='elements_image-avatar'
+							src={author.photo}
+							alt='author'
+						/>
 					</li>
 				)}
 
@@ -15,7 +19,6 @@ export const Author = ({ author, userAdmin }) => {
 						name: <b> {author.name}</b>
 					</p>
 				</li>
-
 				<li>
 					<p>
 						born: <b> {author.born}</b>

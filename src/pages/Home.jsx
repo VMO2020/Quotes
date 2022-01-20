@@ -7,11 +7,11 @@ import { Footer } from '../components/Footer';
 
 // Modals
 import { Modal } from '../components/Modal';
-import LoginForm from '../components/LoginForm';
-import RegisterForm from '../components/RegisterForm';
-import AuthorForm from '../components/AuthorForm';
-import QuoteForm from '../components/QuoteForm';
 import { Share } from '../components/Share';
+import AuthorForm from '../components/AuthorForm';
+import LoginForm from '../components/LoginForm';
+import QuoteForm from '../components/QuoteForm';
+import RegisterForm from '../components/RegisterForm';
 
 // Services
 import { GetAuthors } from '../services/getData';
@@ -30,9 +30,9 @@ const Home = () => {
 	// Open states
 	const [openLogin, setOpenLogin] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
-	const [openRegister, setOpenRegister] = useState(false);
-	const [openQuoteRegister, setOpenQuoteRegister] = useState(false);
-	const [openAuthorRegister, setOpenAuthorRegister] = useState(false);
+	const [openRegisterForm, setOpenRegisterForm] = useState(false);
+	const [openQuoteForm, setOpenQuoteForm] = useState(false);
+	const [openAuthorForm, setOpenAuthorForm] = useState(false);
 
 	// Services Context
 	const { user, avatar, setUser, liked, setLiked, setAvatar, setUserAdmin } =
@@ -64,44 +64,40 @@ const Home = () => {
 						setRenderHome={setRenderHome}
 						setUserAdmin={setUserAdmin}
 						setOpenLogin={setOpenLogin}
-						setOpenRegister={setOpenRegister}
+						setOpenRegisterForm={setOpenRegisterForm}
 					/>
 				</Modal>
 			)}
-			{openRegister && (
+			{openRegisterForm && (
 				<Modal>
 					<RegisterForm
 						setUser={setUser}
 						setRenderHome={setRenderHome}
-						setOpenRegister={setOpenRegister}
+						setOpenRegisterForm={setOpenRegisterForm}
 					/>
 				</Modal>
 			)}
-			{openAuthorRegister && (
+			{openAuthorForm && (
 				<Modal>
 					<AuthorForm
 						user={user}
 						setRenderHome={setRenderHome}
-						setOpenAuthorRegister={setOpenAuthorRegister}
+						setOpenAuthorForm={setOpenAuthorForm}
 					/>
 				</Modal>
 			)}
-			{openQuoteRegister && (
+			{openQuoteForm && (
 				<Modal>
 					<QuoteForm
 						user={user}
 						authorList={authorList}
 						setRenderHome={setRenderHome}
-						setOpenAuthorRegister={setOpenAuthorRegister}
-						setOpenQuoteRegister={setOpenQuoteRegister}
+						setOpenAuthorForm={setOpenAuthorForm}
+						setOpenQuoteForm={setOpenQuoteForm}
 					/>
 				</Modal>
 			)}
-			{openShare && (
-				<Modal>
-					<Share setOpenShare={setOpenShare} url={'vmog.net/'} />
-				</Modal>
-			)}
+			{openShare && <Share setOpenShare={setOpenShare} url={'vmog.net/'} />}
 			<header>
 				<Header
 					user={user}
@@ -113,9 +109,9 @@ const Home = () => {
 					setAuthorFiltered={setAuthorFiltered}
 					setOpenLogin={setOpenLogin}
 					setOpenShare={setOpenShare}
-					setOpenRegister={setOpenRegister}
-					setOpenQuoteRegister={setOpenQuoteRegister}
-					setOpenAuthorRegister={setOpenAuthorRegister}
+					setOpenRegisterForm={setOpenRegisterForm}
+					setOpenQuoteForm={setOpenQuoteForm}
+					setOpenAuthorForm={setOpenAuthorForm}
 				/>
 			</header>
 			<main>

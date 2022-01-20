@@ -34,15 +34,4 @@
 			text-decoration: none;
 		}
 	}
-	li.photo {
-		display: flex;
-		// justify-content: center;
-		margin-bottom: 0.3em;
-		img {
-			width: 5em;
-			height: 5em;
-			object-fit: cover;
-			border-radius: 50%;
-		}
-	}
 }

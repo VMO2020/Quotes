@@ -7,13 +7,14 @@ import { PostQuote } from '../services/postData';
 
 // Icons
 import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
 
 const QuoteForm = ({
 	user,
 	authorList,
 	setRenderHome,
-	setOpenAuthorRegister,
-	setOpenQuoteRegister,
+	setOpenAuthorForm,
+	setOpenQuoteForm,
 }) => {
 	const initialForm = {
 		author: '',
@@ -46,26 +47,28 @@ const QuoteForm = ({
 		PostQuote({ values, setserverError }).then(() => {
 			reset();
 			setserverError('');
-			setOpenQuoteRegister(false);
+			setOpenQuoteForm(false);
 			setRenderHome(true);
 		});
 	}
 
 	const closeQuoteForm = () => {
-		setOpenQuoteRegister(false);
+		setOpenQuoteForm(false);
 	};
 
 	const handleRegisterForm = () => {
-		setOpenQuoteRegister(false);
-		setOpenAuthorRegister(true);
+		setOpenQuoteForm(false);
+		setOpenAuthorForm(true);
 	};
 
 	return (
 		<>
 			<form className='elements_form' onSubmit={handleSubmit} noValidate>
+				<span className='icon-close' onClick={closeQuoteForm}>
+					<Close />
+				</span>
 				<h2>REGISTER Quote</h2>
-				<span onClick={closeQuoteForm}>X</span>
-				<hr />
+				{/* <hr /> */}
 				<div className='form-item'>
 					<label>Author: </label>
 					<select

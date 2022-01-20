@@ -2,13 +2,16 @@ import React, { useState } from 'react';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateRegister';
 
-// components
+// Components
 import { Photo } from '../components/Photo';
 
-//services
+// Services
 import { PostUser } from '../services/postData';
 
-const RegisterForm = ({ setOpenRegister, setUser, setRenderHome }) => {
+// Icons
+import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+
+const RegisterForm = ({ setOpenRegisterForm, setUser, setRenderHome }) => {
 	const initialForm = {
 		name: '',
 		nickname: '',
@@ -30,21 +33,23 @@ const RegisterForm = ({ setOpenRegister, setUser, setRenderHome }) => {
 	const handleData = async (data) => {
 		reset();
 		setserverError('');
-		setOpenRegister(false);
+		setOpenRegisterForm(false);
 		await setUser(data.data.user);
 		await setRenderHome(true);
 	};
 
 	const closeRegisterForm = () => {
-		setOpenRegister(false);
+		setOpenRegisterForm(false);
 	};
 
 	return (
 		<>
 			<form className='elements_form' onSubmit={handleSubmit} noValidate>
+				<span className='icon-close' onClick={closeRegisterForm}>
+					<Close />
+				</span>
 				<h2>REGISTER User</h2>
-				<span onClick={closeRegisterForm}>X</span>
-				<hr />
+				{/* <hr /> */}
 				<div className='form-item'>
 					<label>Name:</label>
 					<div>

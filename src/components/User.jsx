@@ -5,8 +5,12 @@ export const User = ({ user }) => {
 		<div className='elements_card-container'>
 			<ul>
 				{user.photo && (
-					<li className='photo'>
-						<img src={user.photo} alt='author' />
+					<li>
+						<img
+							className='elements_image-avatar'
+							src={user.photo}
+							alt='author'
+						/>
 					</li>
 				)}
 				<li>

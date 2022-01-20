@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import useForm from '../hooks/useForm';
 import validate from '../hooks/validateLogin';
 
-// services
+// Services
 import { PostLogin } from '../services/postData';
+
+// Components
+import { Modal } from '../components/Modal';
+
+// Icons
+import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
 
 const LoginForm = ({
 	setUser,
@@ -12,7 +18,7 @@ const LoginForm = ({
 	setUserAdmin,
 	setOpenLogin,
 	setRenderHome,
-	setOpenRegister,
+	setOpenRegisterForm,
 }) => {
 	const initialForm = {
 		email: '',
@@ -44,7 +50,7 @@ const LoginForm = ({
 
 	const opendRegisterForm = () => {
 		setOpenLogin(false);
-		setOpenRegister(true);
+		setOpenRegisterForm(true);
 	};
 
 	return (
@@ -55,9 +61,11 @@ const LoginForm = ({
 				noValidate
 				id='loginform'
 			>
+				<span className='icon-close' onClick={() => setOpenLogin(false)}>
+					<Close />
+				</span>
 				<h2>LOGIN</h2>
-				<hr />
-				<span onClick={() => setOpenLogin(false)}>X</span>
+				{/* <hr /> */}
 				<div className='form-item'></div>
 				<div className='form-item'>
 					<label>Email:</label>

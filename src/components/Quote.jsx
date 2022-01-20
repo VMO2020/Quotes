@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { Modal } from '../components/Modal';
 import { Share } from '../components/Share';
 import { QuoteEditForm } from '../components/QuoteEditForm';
+import { Toast } from '../components/Toast';
 
-// services
+// Services
 import { DeleteQuote } from '../services/deleteData';
 import { UpdateQuoteLikes } from '../services/patchData';
 
@@ -32,6 +33,7 @@ export const Quote = ({
 	const [likesCount, setLikesCount] = useState(quote.likeCount);
 	const [openShare, setOpenShare] = useState(false);
 	const [openEdit, setOpenEdit] = useState(false);
+	const [openToast, setOpenToast] = useState(false);
 	const [openMessage, setOpenMessage] = useState(false);
 
 	const quoteSelected = `${quote.author}: "${quote.quote}"`;
@@ -82,7 +84,10 @@ export const Quote = ({
 		if (!user) {
 			return setOpenLogin(true);
 		}
+		setOpenToast(true);
+	};
 
+	const deleteQuoteDB = () => {
 		const id = quoteId;
 		// Make a DELETE request to the API
 		DeleteQuote({ id }).then(() => {
@@ -107,13 +112,11 @@ export const Quote = ({
 	return (
 		<div className='components_quote-card-container'>
 			{openShare && (
-				<Modal>
-					<Share
-						setOpenShare={setOpenShare}
-						url={'vmog.net'}
-						message={'Quote copied to clipboard!'}
-					/>
-				</Modal>
+				<Share
+					setOpenShare={setOpenShare}
+					url={'vmog.net'}
+					message={'Quote copied to clipboard!'}
+				/>
 			)}
 			{openEdit && (
 				<Modal>
@@ -127,10 +130,25 @@ export const Quote = ({
 					/>
 				</Modal>
 			)}
+			{openToast && (
+				<Toast
+					title={'DELETE'}
+					message={'Are you sure you want to delete this quote?'}
+					action={'Delete'}
+					actionFunction={deleteQuoteDB}
+					position={'Top'} // Top, Center or Botton
+					setOpenToast={setOpenToast}
+					// timeout={5000}
+				/>
+			)}
 			<ul>
 				<li className='photo'>
 					{photo && (
-						<img className='image-avatar_quote' src={photo} alt={quote._id} />
+						<img
+							className='elements_image-avatar'
+							src={photo}
+							alt={quote._id}
+						/>
 					)}
 					<p className='quote'>
 						<span>&#8220;</span>{' '}

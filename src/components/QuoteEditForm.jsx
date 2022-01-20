@@ -7,6 +7,7 @@ import { EditQuote } from '../services/patchData';
 
 // Icons
 import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
 
 export const QuoteEditForm = ({
 	author,
@@ -50,9 +51,11 @@ export const QuoteEditForm = ({
 	return (
 		<>
 			<form className='elements_form' onSubmit={handleSubmit} noValidate>
+				<span className='icon-close' onClick={closeQuoteForm}>
+					<Close />
+				</span>
 				<h2>EDIT Quote</h2>
-				<span onClick={closeQuoteForm}>X</span>
-				<hr />
+				{/* <hr /> */}
 				<div className='form-item'>
 					<div className='inline-text'>
 						<h4>Author:</h4>

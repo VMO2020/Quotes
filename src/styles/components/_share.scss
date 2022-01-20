@@ -6,21 +6,13 @@
 	flex-wrap: wrap;
 	margin: 0.5em auto;
 	padding: 3.5em 4em 2em;
-	// background-color: var(--backgroundColor);
 	border-radius: 0.3em;
 	background-color: $Light;
-	// box-shadow: var(--shadow);
 
 	&__element {
 		display: flex;
 		flex-direction: row;
 		margin: 0.5em auto;
-	}
-
-	.close {
-		position: absolute;
-		top: 10px;
-		right: 10px;
 	}
 
 	p {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-// helpers
+// Helpers
 import { clearLocalStoreValue } from '../helpers/LocalStore';
 
 // Icons
@@ -19,10 +19,10 @@ export const Header = ({
 	setUserAdmin,
 	setAuthorFiltered,
 	setOpenLogin,
-	setOpenRegister,
 	setOpenShare,
-	setOpenQuoteRegister,
-	setOpenAuthorRegister,
+	setOpenQuoteForm,
+	setOpenAuthorForm,
+	setOpenRegisterForm,
 }) => {
 	const handleSelector = (name) => {
 		// console.log(name);
@@ -46,7 +46,7 @@ export const Header = ({
 
 	const handleAuthorRegister = () => {
 		if (user) {
-			setOpenAuthorRegister(true);
+			setOpenAuthorForm(true);
 		} else {
 			setOpenLogin(true);
 		}
@@ -54,14 +54,14 @@ export const Header = ({
 
 	const handleQuoteRegister = () => {
 		if (user) {
-			setOpenQuoteRegister(true);
+			setOpenQuoteForm(true);
 		} else {
 			setOpenLogin(true);
 		}
 	};
 
 	const handleRegister = () => {
-		setOpenRegister(true);
+		setOpenRegisterForm(true);
 	};
 
 	return (
@@ -93,7 +93,11 @@ export const Header = ({
 						</button>
 					)}
 					{avatar ? (
-						<img className='image-avatar_header' src={avatar} alt='avatar' />
+						<img
+							className='elements_image-avatar_header'
+							src={avatar}
+							alt='avatar'
+						/>
 					) : (
 						<p className='icon'>{user && <IconFace />}</p>
 					)}
