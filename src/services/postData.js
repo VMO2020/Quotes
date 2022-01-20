@@ -57,6 +57,7 @@ export const PostUser = async ({ values, handleData, setserverError }) => {
 				email: values.email,
 				photo: values.photo,
 				password: values.password,
+				subscribe: values.subscribe,
 			},
 			config
 		);

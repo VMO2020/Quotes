@@ -51,6 +51,9 @@ const useForm = (callback, validate, initialForm) => {
 	const handleAllChecked = (event) => {
 		const { name } = event.target;
 		const check = event.target.checked;
+		console.log(name);
+		console.log(check);
+
 		setValues({
 			...values,
 			[name]: check,

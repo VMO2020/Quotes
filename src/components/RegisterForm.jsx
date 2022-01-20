@@ -19,12 +19,20 @@ const RegisterForm = ({ setOpenRegisterForm, setUser, setRenderHome }) => {
 		password: '',
 		password2: '',
 		photo: '',
+		subscribe: false,
 	};
 
 	const [serverError, setserverError] = useState('');
 
-	const { handleChange, handlePhoto, handleSubmit, values, errors, reset } =
-		useForm(submit, validate, initialForm);
+	const {
+		handleChange,
+		handlePhoto,
+		handleSubmit,
+		handleAllChecked,
+		values,
+		errors,
+		reset,
+	} = useForm(submit, validate, initialForm);
 
 	function submit() {
 		PostUser({ values, handleData, setserverError });
@@ -88,6 +96,7 @@ const RegisterForm = ({ setOpenRegisterForm, setUser, setRenderHome }) => {
 							type='email'
 							value={values.email}
 							onChange={handleChange}
+							// autoComplete='off'
 						/>
 						{errors.email && <p className='error'>{errors.email}</p>}
 					</div>
@@ -122,6 +131,19 @@ const RegisterForm = ({ setOpenRegisterForm, setUser, setRenderHome }) => {
 				<div className='form-item'>
 					<Photo handlePhoto={handlePhoto} />
 					{serverError && <p className='error server-error'>{serverError}</p>}
+				</div>
+				<div className='checkbox'>
+					<input
+						id='checkbox1'
+						className='checkbox-item'
+						name='subscribe'
+						type='checkbox'
+						value={values.subscribe}
+						onChange={handleAllChecked}
+					/>
+					<label htmlFor='checkbox1'>
+						<span>✓</span>Subscribe
+					</label>
 				</div>
 				<div className='btn-container'>
 					<button type='submit' className='btn'>

@@ -68,6 +68,40 @@ form {
 		}
 	}
 
+	.checkbox {
+		margin: 1em;
+
+		h3 {
+			@include font-size(16px, 28px);
+		}
+		.checkbox-item {
+			display: none;
+		}
+		label {
+			@include font-size(14px, 22px);
+			margin-bottom: 0.3em;
+			cursor: pointer;
+			margin-right: 1em;
+			display: inline-flex;
+
+			span {
+				background-color: $Light;
+				border: 1px solid $mainColor;
+				border-radius: 3px;
+				color: transparent;
+				margin-right: 0.5em;
+				height: 1em;
+			}
+		}
+		.checkbox-item:checked + label {
+			span {
+				color: $mainColor;
+				background-color: transparent;
+				border: transparent;
+			}
+		}
+	}
+
 	.form-textarea {
 		display: flex;
 		position: relative;

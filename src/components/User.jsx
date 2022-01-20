@@ -31,7 +31,12 @@ export const User = ({ user }) => {
 				</li>
 				<li>
 					<p>
-						email: <b> {user.email}</b>{' '}
+						email: <b> {user.email}</b>
+					</p>
+				</li>
+				<li>
+					<p>
+						subscribed: <b> {user.subscribe ? 'true' : 'false'}</b>
 					</p>
 				</li>
 			</ul>
