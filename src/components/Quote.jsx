@@ -11,12 +11,12 @@ import { DeleteQuote } from '../services/deleteData';
 import { UpdateQuoteLikes } from '../services/patchData';
 
 // Icons
-import { ReactComponent as IconShare } from '../assets/icons/share.svg';
-import { ReactComponent as IconCopy } from '../assets/icons/content_copy.svg';
-import { ReactComponent as IconEdit } from '../assets/icons/edit.svg';
-import { ReactComponent as IconDelete } from '../assets/icons/delete.svg';
-import { ReactComponent as IconFavorite } from '../assets/icons/favorite.svg';
-import { ReactComponent as IconFavoriteFull } from '../assets/icons/favorite_full.svg';
+import { ReactComponent as IconShare } from '../assets/icons/ui/share_nc.svg';
+import { ReactComponent as IconCopy } from '../assets/icons/ui/content_copy_nc.svg';
+import { ReactComponent as IconEdit } from '../assets/icons/ui/edit_nc.svg';
+import { ReactComponent as IconDelete } from '../assets/icons/ui/delete_full_nc.svg';
+import { ReactComponent as IconFavorite } from '../assets/icons/ui/favorite_nc.svg';
+import { ReactComponent as IconFavoriteFull } from '../assets/icons/ui/favorite_full_nc.svg';
 
 export const Quote = ({
 	user,

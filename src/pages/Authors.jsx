@@ -1,20 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
 import { Author } from '../components/Author';
 import { Footer } from '../components/Footer';
+import { Menu } from '../components/Menu';
 
 // Services
 import AuthContextProvider from '../context/AuthContext';
 import AuthorContextProvider from '../context/AuthorContext';
 
 // Icons
-import { ReactComponent as Home } from '../assets/icons/home.svg';
+import { ReactComponent as Home } from '../assets/icons/ui/home_nc.svg';
 
 export const Authors = () => {
 	const { userAdmin } = useContext(AuthContextProvider);
 	const { authorList } = useContext(AuthorContextProvider);
+
+	const [openMenu, setOpenMenu] = useState(false);
 
 	const backToTop = () => {
 		window.location.href = '#top';
@@ -22,6 +25,7 @@ export const Authors = () => {
 
 	return (
 		<div className='pages-container'>
+			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'authors'} />}
 			<header>
 				AUTHORS
 				<Link to='/' style={{ textDecoration: 'none' }}>
@@ -44,7 +48,11 @@ export const Authors = () => {
 			</main>
 
 			<footer className='components_footer-container'>
-				<Footer userAdmin={userAdmin} active={'authors'} />
+				<Footer
+					userAdmin={userAdmin}
+					active={'authors'}
+					setOpenMenu={setOpenMenu}
+				/>
 			</footer>
 		</div>
 	);

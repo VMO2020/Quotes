@@ -4,6 +4,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import { Header } from '../components/Header';
 import { Main } from '../components/Main';
 import { Footer } from '../components/Footer';
+import { Menu } from '../components/Menu';
 
 // Modals
 import { Modal } from '../components/Modal';
@@ -28,6 +29,7 @@ const Home = () => {
 	const [renderHome, setRenderHome] = useState(false);
 
 	// Open states
+	const [openMenu, setOpenMenu] = useState(false);
 	const [openLogin, setOpenLogin] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
 	const [openRegisterForm, setOpenRegisterForm] = useState(false);
@@ -55,6 +57,7 @@ const Home = () => {
 
 	return (
 		<div className='home-container'>
+			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'quotes'} />}
 			{openLogin && (
 				<Modal>
 					<LoginForm
@@ -130,7 +133,7 @@ const Home = () => {
 			</main>
 
 			<footer className='components_footer-container'>
-				<Footer active={'quotes'} />
+				<Footer active={'quotes'} setOpenMenu={setOpenMenu} />
 			</footer>
 		</div>
 	);

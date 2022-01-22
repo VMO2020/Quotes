@@ -1,9 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,700;1,300&display=swap');
 
 // General
-@import '../styles/variables';
-@import '../styles/mixins';
-@import '../styles/reset';
+@import '../styles/general/reset';
+@import '../styles/general/variables';
+@import '../styles/general/mixins';
+@import '../styles/general/general';
 
 // Elements
 @import '../styles/elements/buttons';
@@ -11,17 +12,18 @@
 @import '../styles/elements/icons';
 @import '../styles/elements/images';
 @import '../styles/elements/card';
-@import '../styles/elements/toast';
-
-// pages
-@import '../styles/pages/policy';
-@import '../styles/pages/pages';
-@import '../styles/pages/home';
 
 // components
+@import '../styles/components/toast';
 @import '../styles/components/share';
-@import '../styles/components/quote';
 @import '../styles/components/modal';
-@import '../styles/components/main';
+@import '../styles/components/menu';
+@import '../styles/components/quote';
 @import '../styles/components/header';
+@import '../styles/components/main';
 @import '../styles/components/footer';
+
+// pages
+@import '../styles/pages/home';
+@import '../styles/pages/policy';
+@import '../styles/pages/pages';

@@ -6,8 +6,8 @@ import validate from '../hooks/validateQuote';
 import { PostQuote } from '../services/postData';
 
 // Icons
-import { ReactComponent as IconPaste } from '../assets/icons/paste.svg';
-import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+import { ReactComponent as IconPaste } from '../assets/icons/ui/paste_nc.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close_nc.svg';
 
 const QuoteForm = ({
 	user,

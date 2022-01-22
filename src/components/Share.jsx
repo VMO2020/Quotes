@@ -4,11 +4,11 @@ import React from 'react';
 import { Modal } from '../components/Modal';
 
 // Icons
-import { ReactComponent as Whatsapp } from '../assets/icons/share/whatsapp.svg';
-import { ReactComponent as Facebook } from '../assets/icons/share/facebook.svg';
-import { ReactComponent as Twitter } from '../assets/icons/share/twitter.svg';
-import { ReactComponent as Telegram } from '../assets/icons/share/telegram.svg';
-import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+import { ReactComponent as Facebook } from '../assets/icons/social/facebook_full_nc.svg';
+import { ReactComponent as Whatsapp } from '../assets/icons/social/whatsapp_nc.svg';
+import { ReactComponent as Twitter } from '../assets/icons/social/twitter_full_nc.svg';
+import { ReactComponent as Telegram } from '../assets/icons/social/telegram_full_nc.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close_nc.svg';
 
 export const Share = ({ url, setOpenShare, message }) => {
 	const close = () => {

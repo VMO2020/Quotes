@@ -4,13 +4,14 @@ import { Link } from 'react-router-dom';
 // Components
 import { User } from '../components/User';
 import { Footer } from '../components/Footer';
+import { Menu } from '../components/Menu';
 
 // Services
 import { GetUsers } from '../services/getData';
 import AuthContextProvider from '../context/AuthContext';
 
 // Icons
-import { ReactComponent as Home } from '../assets/icons/home.svg';
+import { ReactComponent as Home } from '../assets/icons/ui/home_nc.svg';
 
 // Read JSON Data
 // const geninfo = require('../data/geninfo.json').data;
@@ -18,6 +19,7 @@ import { ReactComponent as Home } from '../assets/icons/home.svg';
 export const Users = () => {
 	const { userAdmin } = useContext(AuthContextProvider);
 
+	const [openMenu, setOpenMenu] = useState(false);
 	const [dataList, setDataList] = useState([]);
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
@@ -37,6 +39,7 @@ export const Users = () => {
 
 	return (
 		<div className='pages-container'>
+			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'users'} />}
 			<header>
 				USERS
 				<Link to='/' style={{ textDecoration: 'none' }}>
@@ -59,7 +62,11 @@ export const Users = () => {
 				</button>
 			</main>
 			<footer className='components_footer-container'>
-				<Footer userAdmin={userAdmin} active={'users'} />
+				<Footer
+					userAdmin={userAdmin}
+					active={'users'}
+					setOpenMenu={setOpenMenu}
+				/>
 			</footer>
 		</div>
 	);

@@ -4,8 +4,8 @@ import React from 'react';
 import { clearLocalStoreValue } from '../helpers/LocalStore';
 
 // Icons
-import { ReactComponent as IconFace } from '../assets/icons/face.svg';
-import { ReactComponent as IconShare } from '../assets/icons/share.svg';
+import { ReactComponent as IconFace } from '../assets/icons/ui/face_nc.svg';
+import { ReactComponent as IconShare } from '../assets/icons/ui/share_nc.svg';
 
 // Read JSON Data
 const geninfo = require('../data/geninfo.json').data;

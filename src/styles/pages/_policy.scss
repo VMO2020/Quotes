@@ -2,10 +2,10 @@
 	background: $Light;
 	color: $Dark;
 	width: 100vw;
+	overflow: hidden;
 
 	header {
 		@include font-size(20px, 28px);
-		position: fixed;
 		display: block;
 		width: 100%;
 		height: 5vh;
@@ -34,9 +34,14 @@
 	}
 
 	main {
-		overflow-y: hidden;
-		padding: 7vh 1em;
-		padding-right: 1.5em;
+		display: block;
+		width: 100%;
+		height: 85vh;
+		padding: 1vh 1em;
+		color: $Dark;
+		background-color: $Light;
+		overflow: hidden;
+		overflow: auto;
 
 		h1 {
 			color: $Dark;

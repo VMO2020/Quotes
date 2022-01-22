@@ -4,7 +4,7 @@ import React from 'react';
 import { Modal } from '../components/Modal';
 
 // Icons
-import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close_nc.svg';
 
 let btnAction = '';
 let toastPosition = '';

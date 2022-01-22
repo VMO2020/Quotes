@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from 'react-router-dom';
 
 // Services
 import AuthContextProvider from '../context/AuthContext';
 
-export const Footer = ({ active }) => {
+export const Footer = ({ active, setOpenMenu }) => {
 	const { userAdmin } = useContext(AuthContextProvider);
+
 	return (
-		<div>
+		<div className='components_footer'>
 			<Link to='/' style={{ textDecoration: 'none' }}>
 				<span className={active === 'quotes' ? 'active' : 'link'}>Quotes</span>
 			</Link>
@@ -22,16 +23,9 @@ export const Footer = ({ active }) => {
 					<span className={active === 'users' ? 'active' : 'link'}>Users</span>
 				</Link>
 			)}
-			<Link to='/doc/cookies' style={{ textDecoration: 'none' }}>
-				<span className={active === 'cookies' ? 'active' : 'link'}>
-					Cookies
-				</span>
-			</Link>
-			<Link to='/doc/privacy' style={{ textDecoration: 'none' }}>
-				<span className={active === 'privacy' ? 'active' : 'link'}>
-					Privacy
-				</span>
-			</Link>
+			<button className='footer' onClick={() => setOpenMenu(true)}>
+				<span className='footer'>MENU</span>
+			</button>
 		</div>
 	);
 };

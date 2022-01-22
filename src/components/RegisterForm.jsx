@@ -9,7 +9,7 @@ import { Photo } from '../components/Photo';
 import { PostUser } from '../services/postData';
 
 // Icons
-import { ReactComponent as Close } from '../assets/icons/ui/close.svg';
+import { ReactComponent as Close } from '../assets/icons/ui/close_nc.svg';
 
 const RegisterForm = ({ setOpenRegisterForm, setUser, setRenderHome }) => {
 	const initialForm = {

@@ -10,7 +10,7 @@
 	max-width: $maxWidth;
 	height: 100vh;
 	padding: 0;
-	background-color: rgba(125, 125, 125, 0.5);
+	background-color: rgba($mainColor, 0.2);
 	z-index: 10;
 	animation: move 0.4s;
 

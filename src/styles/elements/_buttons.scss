@@ -46,23 +46,23 @@
 }
 
 .btn__facebook {
-	background-color: #3b5998;
+	background-color: $Facebook;
 }
 
 .btn__whatsapp {
-	background-color: #00bb2d;
+	background-color: $Whatsapp;
 }
 
 .btn__twitter {
-	background-color: #1da1f2;
+	background-color: $Twitter;
 }
 
 .btn__instagram {
-	background-color: #dd2a7b;
+	background-color: $Instagram;
 }
 
 .btn__telegram {
-	background-color: #0088cc;
+	background-color: $Telegram;
 }
 
 @media screen and (max-width: 350px) {

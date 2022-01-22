@@ -1,23 +1,27 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 // Components
 import { Footer } from '../components/Footer';
+import { Menu } from '../components/Menu';
 import { ScrollBackToTop } from '../components/ScrollBackToTop';
 
 // Icons
-import { ReactComponent as Home } from '../assets/icons/home.svg';
+import { ReactComponent as Home } from '../assets/icons/ui/home_nc.svg';
 
 // Read JSON Data
 const geninfo = require('../data/geninfo.json').data;
 
 export const CookiePolicy = () => {
+	const [openMenu, setOpenMenu] = useState(false);
+
 	useEffect(() => {
 		window.location.href = '#top';
 	}, []);
 
 	return (
 		<div className='policy'>
+			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'cookies'} />}
 			<header>
 				POLICIES
 				<Link to='/' style={{ textDecoration: 'none' }}>
@@ -101,7 +105,7 @@ export const CookiePolicy = () => {
 				<ScrollBackToTop />
 			</main>
 			<footer className='components_footer-container'>
-				<Footer active={'cookies'} />
+				<Footer active={'cookies'} setOpenMenu={setOpenMenu} />
 			</footer>
 		</div>
 	);

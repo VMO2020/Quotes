@@ -47,3 +47,42 @@
 		}
 	}
 }
+
+.icons-social {
+	margin: 0.2em 0.5em;
+	svg {
+		@include size(24px, 28px);
+		fill: $MedLight;
+		background: $Light;
+		margin: auto;
+
+		&:hover,
+		&:focus {
+			fill: $Dark;
+		}
+	}
+}
+
+.icon-github {
+	svg {
+		fill: $Github;
+	}
+}
+
+.icon-instagram {
+	svg {
+		fill: $Instagram;
+	}
+}
+
+.icon-twitter {
+	svg {
+		fill: $Twitter;
+	}
+}
+
+.icon-linkedin {
+	svg {
+		fill: $Linkedin;
+	}
+}

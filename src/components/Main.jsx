@@ -18,7 +18,7 @@ export const Main = ({
 }) => {
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
-	const [renderMain, setRenderMain] = useState(false);
+	const [renderMain, setRenderMain] = useState(true);
 
 	useEffect(() => {
 		setLoading(true);
