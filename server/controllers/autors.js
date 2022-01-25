@@ -3,10 +3,11 @@ import Autor from '../models/Autors.js';
 // LIST
 export const getAutors = async (req, res) => {
 	try {
-		const Autors = await Autor.find();
+		// Get new authors list, sorted by ascending names (1) or descending names (-1)
+		const authors = await Autor.find().sort({ name: 1 });
 		res.status(201).json({
 			success: true,
-			Autors,
+			authors,
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -32,7 +33,7 @@ export const registerAutor = async (req, res) => {
 				error: 'Name already in use',
 			});
 		// Create a new author
-		const autor = await Autor.create({
+		const author = await Autor.create({
 			name,
 			country,
 			born,
@@ -42,10 +43,13 @@ export const registerAutor = async (req, res) => {
 			created,
 			tags: tagsSeparated,
 		});
+		// Get new authors list, sorted by ascending names (1) or descending names (-1)
+		const authors = await Autor.find().sort({ name: 1 });
 
 		res.status(201).json({
 			success: true,
-			autor,
+			author,
+			authors,
 		});
 	} catch (error) {
 		res.status(500).json({

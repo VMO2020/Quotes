@@ -3,7 +3,7 @@ import Quote from '../models/Quotes.js';
 // LIST
 export const getQuotes = async (req, res) => {
 	try {
-		const Quotes = await Quote.find();
+		const Quotes = await Quote.find().sort({ author: 1 });
 		res.status(201).json({
 			success: true,
 			Quotes,
@@ -35,9 +35,13 @@ export const registerQuote = async (req, res) => {
 			creator,
 		});
 
+		// Get Quotes
+		const quotes = await Quote.find().sort({ author: 1 });
+
 		res.status(201).json({
 			success: true,
 			newquote,
+			quotes,
 		});
 	} catch (error) {
 		res.status(500).json({

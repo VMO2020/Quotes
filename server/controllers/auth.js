@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs';
 
 // REGISTER
 export const Register = async (req, res) => {
-	const { username, nickname, email, password, photo } = req.body;
+	const { username, nickname, email, password, photo, subscribe } = req.body;
 
 	// Hash passwords
 	const salt = await bcrypt.genSalt(10);
@@ -33,6 +33,7 @@ export const Register = async (req, res) => {
 			email,
 			photo,
 			password: hashedPassword,
+			subscribe,
 		});
 
 		res.status(201).json({
@@ -94,7 +95,10 @@ export const Login = async (req, res) => {
 // LIST
 export const getUsers = async (req, res) => {
 	try {
-		const Users = await User.find().select('-password').select('-admin');
+		const Users = await User.find()
+			.sort({ username: 1 })
+			.select('-password')
+			.select('-admin');
 		res.status(201).json({
 			success: true,
 			Users,
