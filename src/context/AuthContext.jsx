@@ -7,6 +7,7 @@ export function AuthContextProvider({ children }) {
 	const [avatar, setAvatar] = useState('');
 	const [liked, setLiked] = useState([]);
 	const [userAdmin, setUserAdmin] = useState(false);
+	const [userAceptCookies, setUserAcceptCookies] = useState(false);
 
 	return (
 		<Context.Provider
@@ -19,6 +20,8 @@ export function AuthContextProvider({ children }) {
 				setLiked,
 				userAdmin,
 				setUserAdmin,
+				userAceptCookies,
+				setUserAcceptCookies,
 			}}
 		>
 			{children}

@@ -15,7 +15,7 @@ import QuoteForm from '../components/QuoteForm';
 import RegisterForm from '../components/RegisterForm';
 
 // Services
-import { GetAuthors } from '../services/getData';
+// import { GetAuthors } from '../services/getData';
 import AuthContextProvider from '../context/AuthContext';
 import AuthorContextProvider from '../context/AuthorContext';
 import QuotesContextProvider from '../context/QuotesContext';
@@ -23,41 +23,51 @@ import QuotesContextProvider from '../context/QuotesContext';
 // helpers
 import { getLocalStoreValue } from '../helpers/LocalStore';
 
-const Home = () => {
-	const [loading, setLoading] = useState(false);
-	const [error, setError] = useState('');
-	const [renderHome, setRenderHome] = useState(false);
+const Home = ({ loading, error, setAuthorList }) => {
+	const [renderHome, setRenderHome] = useState(true);
 
 	// Open states
 	const [openMenu, setOpenMenu] = useState(false);
 	const [openLogin, setOpenLogin] = useState(false);
 	const [openShare, setOpenShare] = useState(false);
-	const [openRegisterForm, setOpenRegisterForm] = useState(false);
 	const [openQuoteForm, setOpenQuoteForm] = useState(false);
 	const [openAuthorForm, setOpenAuthorForm] = useState(false);
+	const [openRegisterForm, setOpenRegisterForm] = useState(false);
 
 	// Services Context
-	const { user, avatar, setUser, liked, setLiked, setAvatar, setUserAdmin } =
-		useContext(AuthContextProvider);
-	const { authorList, AuthorFiltered, setAuthorList, setAuthorFiltered } =
-		useContext(AuthorContextProvider);
+	const {
+		user,
+		avatar,
+		setUser,
+		liked,
+		setLiked,
+		setAvatar,
+		setUserAdmin,
+		userAceptCookies,
+		setUserAcceptCookies,
+	} = useContext(AuthContextProvider);
+
+	const { authorList, AuthorFiltered, setAuthorFiltered } = useContext(
+		AuthorContextProvider
+	);
+
 	const { dataList, setDataList } = useContext(QuotesContextProvider);
 
 	useEffect(() => {
+		// console.log('Home Rendered');
 		// Helper Local Storage
 		const getUserId = getLocalStoreValue('auth-ID');
 		if (getUserId) {
 			setUser(getUserId);
 		}
-		// Service Authors
-		GetAuthors({ setAuthorList, setLoading, setError });
 		// Render
 		setRenderHome(false);
-	}, [renderHome, setAuthorList, setUser]);
+	}, [renderHome, setAuthorList, setUser, setDataList]);
 
 	return (
 		<div className='home-container'>
 			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'quotes'} />}
+
 			{openLogin && (
 				<Modal>
 					<LoginForm
@@ -68,6 +78,7 @@ const Home = () => {
 						setUserAdmin={setUserAdmin}
 						setOpenLogin={setOpenLogin}
 						setOpenRegisterForm={setOpenRegisterForm}
+						setUserAcceptCookies={setUserAcceptCookies}
 					/>
 				</Modal>
 			)}
@@ -77,6 +88,7 @@ const Home = () => {
 						setUser={setUser}
 						setRenderHome={setRenderHome}
 						setOpenRegisterForm={setOpenRegisterForm}
+						setUserAcceptCookies={setUserAcceptCookies}
 					/>
 				</Modal>
 			)}
@@ -86,6 +98,7 @@ const Home = () => {
 						user={user}
 						setRenderHome={setRenderHome}
 						setOpenAuthorForm={setOpenAuthorForm}
+						setAuthorList={setAuthorList}
 					/>
 				</Modal>
 			)}
@@ -94,6 +107,7 @@ const Home = () => {
 					<QuoteForm
 						user={user}
 						authorList={authorList}
+						setDataList={setDataList}
 						setRenderHome={setRenderHome}
 						setOpenAuthorForm={setOpenAuthorForm}
 						setOpenQuoteForm={setOpenQuoteForm}
@@ -124,11 +138,12 @@ const Home = () => {
 					user={user}
 					liked={liked}
 					dataList={dataList}
-					renderHome={renderHome}
 					authorList={authorList}
 					AuthorFiltered={AuthorFiltered}
+					userAceptCookies={userAceptCookies}
 					setDataList={setDataList}
 					setOpenLogin={setOpenLogin}
+					setUserAcceptCookies={setUserAcceptCookies}
 				/>
 			</main>
 

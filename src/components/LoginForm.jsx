@@ -5,9 +5,6 @@ import validate from '../hooks/validateLogin';
 // Services
 import { PostLogin } from '../services/postData';
 
-// Components
-import { Modal } from '../components/Modal';
-
 // Icons
 import { ReactComponent as Close } from '../assets/icons/ui/close_nc.svg';
 
@@ -19,6 +16,7 @@ const LoginForm = ({
 	setOpenLogin,
 	setRenderHome,
 	setOpenRegisterForm,
+	setUserAcceptCookies,
 }) => {
 	const initialForm = {
 		email: '',
@@ -41,11 +39,12 @@ const LoginForm = ({
 		reset();
 		setserverError('');
 		setOpenLogin(false);
+		setRenderHome(true);
+		setUserAcceptCookies(true);
 		await setUser(data.data.user);
 		await setUserAdmin(data.data.ua);
 		await setAvatar(data.data.photo);
 		await setLiked(data.data.liked);
-		await setRenderHome(true);
 	};
 
 	const opendRegisterForm = () => {

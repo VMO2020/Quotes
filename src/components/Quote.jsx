@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
+// import { Navigate } from 'react-router-dom';
 
 // Modals
 import { Modal } from '../components/Modal';
 import { Share } from '../components/Share';
-import { QuoteEditForm } from '../components/QuoteEditForm';
 import { Toast } from '../components/Toast';
+import { QuoteEditForm } from '../components/QuoteEditForm';
 
 // Services
 import { DeleteQuote } from '../services/deleteData';
@@ -27,16 +28,17 @@ export const Quote = ({
 	setRenderMain,
 }) => {
 	// States
-	const [quoteEdited, setQuoteEdited] = useState('');
 	const [isFavorite, setIsFavorite] = useState(false);
 	const [isCreator, setIsCreator] = useState(false);
+	const [quoteEdited, setQuoteEdited] = useState('');
 	const [likesCount, setLikesCount] = useState(quote.likeCount);
-	const [openShare, setOpenShare] = useState(false);
+	let quoteSelected = `${quote.author}: "${quote.quote}"`;
+
+	// States Open
 	const [openEdit, setOpenEdit] = useState(false);
+	const [openShare, setOpenShare] = useState(false);
 	const [openToast, setOpenToast] = useState(false);
 	const [openMessage, setOpenMessage] = useState(false);
-
-	const quoteSelected = `${quote.author}: "${quote.quote}"`;
 
 	const author = quote.author;
 	const quoteId = quote._id;
@@ -65,6 +67,9 @@ export const Quote = ({
 	};
 
 	const handleCopy = () => {
+		if (quoteEdited) {
+			quoteSelected = `${quote.author}: "${quoteEdited}"`;
+		}
 		let copyArea = quoteSelected;
 		// write text to clipboard
 		navigator.clipboard.writeText(copyArea);
@@ -87,11 +92,15 @@ export const Quote = ({
 		setOpenToast(true);
 	};
 
-	const deleteQuoteDB = () => {
+	const deleteQuoteDB = async () => {
 		const id = quoteId;
 		// Make a DELETE request to the API
-		DeleteQuote({ id }).then(() => {
+		await DeleteQuote({ id }).then(() => {
 			setRenderMain(true);
+			setOpenEdit(false);
+			setOpenToast(false);
+
+			// return <Navigate to='/' />;
 		});
 	};
 
@@ -125,6 +134,7 @@ export const Quote = ({
 						author={author}
 						quote={quote}
 						authorList={authorList}
+						quoteEdited={quoteEdited}
 						setOpenEdit={setOpenEdit}
 						setQuoteEdited={setQuoteEdited}
 					/>
@@ -132,6 +142,7 @@ export const Quote = ({
 			)}
 			{openToast && (
 				<Toast
+					closeIcon={true}
 					title={'DELETE'}
 					message={'Are you sure you want to delete this quote?'}
 					action={'Delete'}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 // Helpers
 import { clearLocalStoreValue } from '../helpers/LocalStore';

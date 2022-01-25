@@ -6,7 +6,11 @@ import { setLocalStoreValue } from '../helpers/LocalStore';
 const URL = process.env.REACT_APP_URL;
 
 // AUTHORS
-export const PostAuthors = async ({ values, setserverError }) => {
+export const PostAuthors = async ({
+	values,
+	setserverError,
+	setAuthorList,
+}) => {
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -30,6 +34,7 @@ export const PostAuthors = async ({ values, setserverError }) => {
 		);
 
 		console.log(data.data);
+		setAuthorList(data.data.authors);
 		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);
@@ -75,7 +80,7 @@ export const PostUser = async ({ values, handleData, setserverError }) => {
 };
 
 // QUOTES
-export const PostQuote = async ({ values, setserverError }) => {
+export const PostQuote = async ({ values, setserverError, setDataList }) => {
 	const config = {
 		header: {
 			'Content-Type': 'application/json',
@@ -94,6 +99,7 @@ export const PostQuote = async ({ values, setserverError }) => {
 		);
 
 		console.log(data.data);
+		setDataList(data.data.quotes);
 		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);

@@ -33,25 +33,5 @@
 			// cursor: none;
 			pointer-events: none;
 		}
-
-		button.footer {
-			@include font-size(16px, 28px);
-			background: transparent;
-			border: none;
-			span.footer {
-				font-size: 0.8em;
-				color: $Light;
-				padding: 0 0.5em;
-				line-height: 5vh;
-				background-color: $mainColor;
-				transition: all 0.5s ease;
-
-				&:hover {
-					color: $mainColor;
-					background: $Light;
-					border-radius: 0.5em;
-				}
-			}
-		}
 	}
 }

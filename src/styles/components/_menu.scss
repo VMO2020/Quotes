@@ -22,7 +22,7 @@
 		span {
 			@include font-size(22px, 28px);
 			display: block;
-			width: 70%;
+			width: 80%;
 			margin: 0.7em auto;
 			text-align: center;
 			color: $Dark;
@@ -42,5 +42,8 @@
 		align-items: center;
 		width: 80%;
 		margin: 1em auto;
+		padding: 0.3em;
+		border: 2px solid $mainColor;
+		border-radius: 1em;
 	}
 }

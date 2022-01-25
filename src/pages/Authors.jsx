@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 // Components
 import { Author } from '../components/Author';
@@ -14,7 +15,7 @@ import AuthorContextProvider from '../context/AuthorContext';
 import { ReactComponent as Home } from '../assets/icons/ui/home_nc.svg';
 
 export const Authors = () => {
-	const { userAdmin } = useContext(AuthContextProvider);
+	const { userAdmin, userAceptCookies } = useContext(AuthContextProvider);
 	const { authorList } = useContext(AuthorContextProvider);
 
 	const [openMenu, setOpenMenu] = useState(false);
@@ -22,6 +23,10 @@ export const Authors = () => {
 	const backToTop = () => {
 		window.location.href = '#top';
 	};
+
+	if (!userAceptCookies) {
+		return <Navigate to='/quotes' element={<Home />} />;
+	}
 
 	return (
 		<div className='pages-container'>

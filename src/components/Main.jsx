@@ -3,6 +3,9 @@ import React, { useState, useEffect } from 'react';
 // Components
 import { Quote } from '../components/Quote';
 
+// Modals
+import { Toast } from '../components/Toast';
+
 // Services
 import { GetQuotes } from '../services/getData';
 
@@ -10,25 +13,38 @@ export const Main = ({
 	user,
 	liked,
 	dataList,
-	renderHome,
 	authorList,
 	AuthorFiltered,
 	setDataList,
 	setOpenLogin,
+	userAceptCookies,
+	setUserAcceptCookies,
 }) => {
-	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState('');
-	const [renderMain, setRenderMain] = useState(true);
+	const [loading, setLoading] = useState(false);
+	const [renderMain, setRenderMain] = useState(false);
+	const [openCookiesToast, setOpenCookiesToast] = useState(false);
 
 	useEffect(() => {
-		setLoading(true);
-		GetQuotes({ setDataList, setLoading, setError });
+		// console.log('Main Rendered');
+		if (!user) {
+			setOpenCookiesToast(true);
+		}
+		if (renderMain) {
+			GetQuotes({ setDataList, setLoading, setError });
+		}
 		setRenderMain(false);
-	}, [setDataList, renderMain, renderHome]);
+	}, [user, setDataList, renderMain]);
 
 	useEffect(() => {
 		backToTop();
 	}, [AuthorFiltered]);
+
+	const handleCookiesAccepted = () => {
+		// console.log('Cookies Accepted');
+		setOpenCookiesToast(false);
+		setUserAcceptCookies(true);
+	};
 
 	const quotesFiltered = dataList.filter(function (el) {
 		return el.author === AuthorFiltered;
@@ -40,9 +56,23 @@ export const Main = ({
 
 	return (
 		<div className='components_main'>
+			{!userAceptCookies && openCookiesToast && (
+				<Toast
+					closeIcon={false}
+					title={'COOKIES'}
+					message={
+						'We use cookies to give you the best possible experience while you browse through our website. By pursuing the use of our website you implicitly agree to the usage of cookies on this site.'
+					}
+					action={'cookies'}
+					actionFunction={handleCookiesAccepted}
+					position={'Center'} // Top, Center or Botton
+					setOpenToast={setOpenCookiesToast}
+					// timeout={5000}
+				/>
+			)}
 			<div id='top'></div>
-			{error && <h2 className='center'>{error}</h2>}
-			{loading && <h3 style={{ color: 'red' }}>Loading...</h3>}
+			{/* {error && <h2 className='center'>{error}</h2>} */}
+			{/* {loading && <h3 style={{ color: 'red' }}>Loading...</h3>} */}
 
 			<div className='list-container'>
 				{AuthorFiltered !== 'all'

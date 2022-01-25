@@ -4,6 +4,7 @@
 	width: 80%;
 	max-width: 350px;
 	margin: auto;
+	padding: 1.5em 1em;
 	background-color: $Light;
 	border-radius: 0.3em;
 	border: 1px solid $ExtraLight;
@@ -14,7 +15,7 @@
 		display: block;
 		text-align: center;
 		color: $mainColor;
-		margin: 1em;
+		margin-bottom: 1em;
 	}
 
 	p {
@@ -28,7 +29,6 @@
 		justify-content: space-around;
 		align-items: center;
 		margin-top: 1.6em;
-		margin-bottom: 1.3em;
 
 		.delete {
 			background-color: red;

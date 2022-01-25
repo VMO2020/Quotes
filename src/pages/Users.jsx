@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 
 // Components
 import { User } from '../components/User';
@@ -25,17 +25,20 @@ export const Users = () => {
 	const [error, setError] = useState('');
 
 	useEffect(() => {
+		console.log('Users Rendered');
 		if (userAdmin) {
 			setLoading(true);
 			GetUsers({ setDataList, setLoading, setError });
-		} else {
-			setError('User not allowed');
 		}
 	}, [userAdmin]);
 
 	const backToTop = () => {
 		window.location.href = '#top';
 	};
+
+	if (!userAdmin) {
+		return <Navigate to='/quotes' element={<Home />} />;
+	}
 
 	return (
 		<div className='pages-container'>
