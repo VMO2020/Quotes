@@ -2,7 +2,7 @@ import User from '../models/User.js';
 import Quote from '../models/Quotes.js';
 import bcrypt from 'bcryptjs';
 
-// REGISTER
+// REGISTER USER
 export const Register = async (req, res) => {
 	const { username, nickname, email, password, photo, subscribe } = req.body;
 
@@ -48,7 +48,7 @@ export const Register = async (req, res) => {
 	}
 };
 
-// LOGIN
+// LOGIN USER
 export const Login = async (req, res) => {
 	const { email, password } = req.body;
 
@@ -92,7 +92,7 @@ export const Login = async (req, res) => {
 		});
 	}
 };
-// LIST
+// LIST USERS
 export const getUsers = async (req, res) => {
 	try {
 		const Users = await User.find()
@@ -102,6 +102,25 @@ export const getUsers = async (req, res) => {
 		res.status(201).json({
 			success: true,
 			Users,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
+
+// GET USER
+export const getUser = async (req, res) => {
+	const { id } = req.params;
+
+	try {
+		const Users = await User.findById(id).select('-password').select('-admin');
+
+		res.status(201).json({
+			success: true,
+			User: Users,
 		});
 	} catch (error) {
 		res.status(500).json({
@@ -163,6 +182,48 @@ export const updateUser = async (req, res) => {
 			likes,
 			updatedUser,
 			updatedQuote,
+		});
+	} catch (error) {
+		res.status(500).json({
+			success: false,
+			error: error.message,
+		});
+	}
+};
+
+// EDIT USER AND UPDATE
+export const editUser = async (req, res) => {
+	const { userId, updateData } = req.body;
+
+	try {
+		let username = updateData.username;
+		let nickname = updateData.nickname;
+		let email = updateData.email;
+		let photo = updateData.photo;
+		let subscribe = updateData.subscribe;
+
+		// Check if user exist
+		const user = await User.findById({ _id: userId });
+		if (!user) {
+			return res.status(401).send({
+				success: false,
+				error: 'UserId not valid',
+			});
+		}
+		// Update user new data
+
+		const updatedUser = await User.findByIdAndUpdate(
+			userId,
+			{ username, nickname, email, photo, subscribe },
+			{ new: true }
+		);
+
+		res.status(201).json({
+			success: true,
+			updatedUser,
+			// username,
+			// nickname,
+			// email,
 		});
 	} catch (error) {
 		res.status(500).json({
