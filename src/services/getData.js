@@ -2,6 +2,22 @@ import Axios from 'axios';
 
 const URL = process.env.REACT_APP_URL;
 
+// Get User
+export const GetUser = async ({ user, handleUserData, setserverError }) => {
+	const endpoint = '/api/user/user';
+
+	try {
+		const data = await Axios.get(`${URL}${endpoint}/${user}`);
+
+		// console.log(data.data);
+		handleUserData(data);
+		return data.data;
+	} catch (error) {
+		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+	}
+};
+
 // Get Users List
 export const GetUsers = async ({ setDataList, setLoading, setError }) => {
 	const endpoint = '/api/user/list';

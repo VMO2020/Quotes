@@ -33,7 +33,7 @@ export const PostAuthors = async ({
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
 		setAuthorList(data.data.authors);
 		return data.data;
 	} catch (error) {
@@ -67,7 +67,7 @@ export const PostUser = async ({ values, handleData, setserverError }) => {
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
 		setLocalStoreValue('auth-ID', data.data.user);
 		return handleData(data);
 	} catch (error) {
@@ -98,7 +98,7 @@ export const PostQuote = async ({ values, setserverError, setDataList }) => {
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
 		setDataList(data.data.quotes);
 		return data.data;
 	} catch (error) {
@@ -128,7 +128,7 @@ export const PostLogin = async ({ values, handleData, setserverError }) => {
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
 		setLocalStoreValue('auth-ID', data.data.user);
 		return handleData(data);
 	} catch (error) {

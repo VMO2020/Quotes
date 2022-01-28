@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // Helpers
 import { clearLocalStoreValue } from '../helpers/LocalStore';
@@ -23,6 +23,8 @@ export const Header = ({
 	setOpenQuoteForm,
 	setOpenAuthorForm,
 	setOpenRegisterForm,
+	setUserAcceptCookies,
+	setOpenEditUserForm,
 }) => {
 	const handleSelector = (name) => {
 		// console.log(name);
@@ -41,6 +43,7 @@ export const Header = ({
 		setUser('');
 		setAvatar('');
 		setUserAdmin(false);
+		setUserAcceptCookies(false);
 		clearLocalStoreValue('auth-ID');
 	};
 
@@ -62,6 +65,10 @@ export const Header = ({
 
 	const handleRegister = () => {
 		setOpenRegisterForm(true);
+	};
+
+	const handleEditUser = () => {
+		setOpenEditUserForm(true);
 	};
 
 	return (
@@ -94,12 +101,15 @@ export const Header = ({
 					)}
 					{avatar ? (
 						<img
+							onClick={() => handleEditUser()}
 							className='elements_image-avatar_header'
 							src={avatar}
 							alt='avatar'
 						/>
 					) : (
-						<p className='icon'>{user && <IconFace />}</p>
+						<p onClick={() => handleEditUser()} className='icon'>
+							{user && <IconFace />}
+						</p>
 					)}
 				</div>
 			</div>

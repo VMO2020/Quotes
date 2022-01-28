@@ -25,7 +25,7 @@ export const UpdateQuoteLikes = async ({
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
 		await setLikesCount(data.data.updatedQuote.likeCount);
 	} catch (error) {
 		console.log(error.response.data.error);
@@ -50,7 +50,36 @@ export const EditQuote = async ({ values, setserverError }) => {
 			config
 		);
 
-		console.log(data.data);
+		// console.log(data.data);
+	} catch (error) {
+		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+		setTimeout(() => {
+			setserverError('');
+		}, 5000);
+	}
+};
+
+// UPDATE USER PROFILE
+export const EditUser = async ({ valuesEdited, setserverError }) => {
+	// console.log(valuesEdited);
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const data = await Axios.patch(
+			`${URL}/api/user/edit`,
+			{
+				userId: valuesEdited.userId,
+				updateData: valuesEdited.updateData,
+			},
+			config
+		);
+
+		// console.log(data.data);
 	} catch (error) {
 		console.log(error.response.data.error);
 		setserverError(error.response.data.error);

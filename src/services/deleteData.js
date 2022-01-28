@@ -6,7 +6,7 @@ export const DeleteQuote = async ({ id }) => {
 	try {
 		const data = await Axios.delete(`${URL}/api/quotes/delete/${id}`);
 
-		console.log(data.data);
+		// console.log(data.data);
 		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);

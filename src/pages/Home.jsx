@@ -13,9 +13,9 @@ import AuthorForm from '../components/AuthorForm';
 import LoginForm from '../components/LoginForm';
 import QuoteForm from '../components/QuoteForm';
 import RegisterForm from '../components/RegisterForm';
+import EditUserForm from '../components/EditUserForm';
 
 // Services
-// import { GetAuthors } from '../services/getData';
 import AuthContextProvider from '../context/AuthContext';
 import AuthorContextProvider from '../context/AuthorContext';
 import QuotesContextProvider from '../context/QuotesContext';
@@ -33,6 +33,7 @@ const Home = ({ loading, error, setAuthorList }) => {
 	const [openQuoteForm, setOpenQuoteForm] = useState(false);
 	const [openAuthorForm, setOpenAuthorForm] = useState(false);
 	const [openRegisterForm, setOpenRegisterForm] = useState(false);
+	const [openEditUserForm, setOpenEditUserForm] = useState(false);
 
 	// Services Context
 	const {
@@ -54,15 +55,15 @@ const Home = ({ loading, error, setAuthorList }) => {
 	const { dataList, setDataList } = useContext(QuotesContextProvider);
 
 	useEffect(() => {
-		// console.log('Home Rendered');
 		// Helper Local Storage
 		const getUserId = getLocalStoreValue('auth-ID');
 		if (getUserId) {
 			setUser(getUserId);
+			setUserAcceptCookies(true);
 		}
 		// Render
 		setRenderHome(false);
-	}, [renderHome, setAuthorList, setUser, setDataList]);
+	}, [renderHome, setAuthorList, setUser, setDataList, setUserAcceptCookies]);
 
 	return (
 		<div className='home-container'>
@@ -114,6 +115,11 @@ const Home = ({ loading, error, setAuthorList }) => {
 					/>
 				</Modal>
 			)}
+			{openEditUserForm && (
+				<Modal>
+					<EditUserForm user={user} setOpenEditUserForm={setOpenEditUserForm} />
+				</Modal>
+			)}
 			{openShare && <Share setOpenShare={setOpenShare} url={'vmog.net/'} />}
 			<header>
 				<Header
@@ -129,6 +135,8 @@ const Home = ({ loading, error, setAuthorList }) => {
 					setOpenRegisterForm={setOpenRegisterForm}
 					setOpenQuoteForm={setOpenQuoteForm}
 					setOpenAuthorForm={setOpenAuthorForm}
+					setUserAcceptCookies={setUserAcceptCookies}
+					setOpenEditUserForm={setOpenEditUserForm}
 				/>
 			</header>
 			<main>

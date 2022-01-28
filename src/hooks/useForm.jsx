@@ -19,6 +19,18 @@ const useForm = (callback, validate, initialForm) => {
 		});
 	};
 
+	const handleUserValues = (values) => {
+		const { username, nickname, email, photo, subscribe } = values;
+		setValues({
+			...values,
+			username: username,
+			nickname: nickname,
+			email: email,
+			photo: photo,
+			subscribe: subscribe,
+		});
+	};
+
 	const handleValue = (name, value, error) => {
 		if (value) {
 			setValues({
@@ -81,6 +93,7 @@ const useForm = (callback, validate, initialForm) => {
 		handleSubmit,
 		handleSelector,
 		handleAllChecked,
+		handleUserValues,
 		handleValue,
 		setValues,
 		values,
