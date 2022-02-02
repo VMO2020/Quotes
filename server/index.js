@@ -6,7 +6,7 @@ import mongoose from 'mongoose';
 // Import Routes
 import homeRoute from './routes/home.js';
 import authRoute from './routes/auth.js';
-import autorsRoute from './routes/autors.js';
+import autorsRoute from './routes/authors.js';
 import quotesRoute from './routes/quotes.js';
 
 // Config

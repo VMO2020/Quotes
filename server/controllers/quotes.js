@@ -51,7 +51,7 @@ export const registerQuote = async (req, res) => {
 	}
 };
 
-// UPDATE
+// UPDATE QUOTE
 export const updateQuote = async (req, res) => {
 	const { quoteId, quoteEdited } = req.body;
 

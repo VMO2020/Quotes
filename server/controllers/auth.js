@@ -211,7 +211,6 @@ export const editUser = async (req, res) => {
 			});
 		}
 		// Update user new data
-
 		const updatedUser = await User.findByIdAndUpdate(
 			userId,
 			{ username, nickname, email, photo, subscribe },
