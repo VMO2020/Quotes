@@ -27,6 +27,7 @@ export const UpdateQuoteLikes = async ({
 
 		// console.log(data.data);
 		await setLikesCount(data.data.updatedQuote.likeCount);
+		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);
 	}
@@ -51,6 +52,7 @@ export const EditQuote = async ({ values, setserverError }) => {
 		);
 
 		// console.log(data.data);
+		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);
 		setserverError(error.response.data.error);
@@ -80,8 +82,37 @@ export const EditUser = async ({ valuesEdited, setserverError }) => {
 		);
 
 		// console.log(data.data);
+		return data.data;
 	} catch (error) {
 		console.log(error.response.data.error);
+		setserverError(error.response.data.error);
+		setTimeout(() => {
+			setserverError('');
+		}, 5000);
+	}
+};
+
+// EDIT AUTHOR
+export const EditAuthor = async ({ values, setserverError }) => {
+	// console.log(values);
+	const config = {
+		header: {
+			'Content-Type': 'application/json',
+		},
+	};
+
+	try {
+		const data = await Axios.patch(
+			`${URL}/api/authors/edit`,
+			{
+				values,
+			},
+			config
+		);
+		// console.log(data.data);
+		return data.data;
+	} catch (error) {
+		// console.log(error.response.data.error);
 		setserverError(error.response.data.error);
 		setTimeout(() => {
 			setserverError('');

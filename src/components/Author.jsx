@@ -1,8 +1,33 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-export const Author = ({ author, userAdmin }) => {
+// Modals
+import { Modal } from '../components/Modal';
+import AuthorEdit from '../components/AuthorEdit';
+
+// Icons
+import { ReactComponent as IconEdit } from '../assets/icons/ui/edit_nc.svg';
+
+export const Author = ({ user, author, userAdmin }) => {
+	const [isCreator, setIsCreator] = useState(false);
+	const [openEdit, setOpenEdit] = useState(false);
+
+	useEffect(() => {
+		if (user === author.created) {
+			setIsCreator(true);
+		}
+	}, []);
+
+	const handleEdit = () => {
+		setOpenEdit(true);
+	};
+
 	return (
 		<div className='elements_card-container'>
+			{openEdit && (
+				<Modal>
+					<AuthorEdit setOpenEdit={setOpenEdit} author={author} />
+				</Modal>
+			)}
 			<ul>
 				{author.photo && (
 					<li>
@@ -57,7 +82,7 @@ export const Author = ({ author, userAdmin }) => {
 				<p>Tags:</p>
 				<li className='tags'>
 					{author.tags.map((tag, index) => (
-						<p key={index}>
+						<p key={index} className='tag'>
 							<b>{tag}</b>
 						</p>
 					))}
@@ -68,6 +93,13 @@ export const Author = ({ author, userAdmin }) => {
 					</li>
 				)}
 			</ul>
+			<div className='icons-container'>
+				{isCreator && (
+					<button className='icons-quote' onClick={handleEdit}>
+						<IconEdit />
+					</button>
+				)}
+			</div>
 		</div>
 	);
 };

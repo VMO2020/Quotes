@@ -15,7 +15,7 @@ import AuthorContextProvider from '../context/AuthorContext';
 import { ReactComponent as Home } from '../assets/icons/ui/home_nc.svg';
 
 export const Authors = () => {
-	const { userAdmin, userAceptCookies } = useContext(AuthContextProvider);
+	const { user, userAdmin, userAceptCookies } = useContext(AuthContextProvider);
 	const { authorList } = useContext(AuthorContextProvider);
 
 	const [openMenu, setOpenMenu] = useState(false);
@@ -44,7 +44,12 @@ export const Authors = () => {
 				<div id='top'>...</div>
 				<div className='list-container'>
 					{authorList.map((author) => (
-						<Author key={author._id} author={author} userAdmin={userAdmin} />
+						<Author
+							key={author._id}
+							author={author}
+							user={user}
+							userAdmin={userAdmin}
+						/>
 					))}
 				</div>
 				<button className='btn btn-top' onClick={() => backToTop()}>

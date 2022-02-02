@@ -33,5 +33,14 @@
 			color: blue;
 			text-decoration: none;
 		}
+
+		.tag {
+			margin-right: 0.5em;
+			color: $MedLight;
+			font-size: 1em;
+		}
+	}
+	.icons-container {
+		margin-top: 1em;
 	}
 }
