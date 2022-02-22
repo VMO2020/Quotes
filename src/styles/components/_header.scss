@@ -8,7 +8,10 @@
 
 	h3 {
 		height: 4vh;
-		a {
+		#logo {
+			@include font-size(20px, 28px);
+			font-family: 'Parisienne', cursive;
+			font-weight: 300;
 			color: $Light;
 			text-decoration: none;
 			transition: all 0.5s ease;

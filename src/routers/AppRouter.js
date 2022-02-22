@@ -36,7 +36,7 @@ export const AppRouter = () => {
 								element={<CookiePolicy />}
 								rel='nofollow'
 							/>
-							<Route path='*' element={<Navigate to='/quotes' />} />
+							<Route path='*' element={<Navigate to='/' />} />
 						</Routes>
 					</QuotesContextProvider>
 				</AuthorContextProvider>

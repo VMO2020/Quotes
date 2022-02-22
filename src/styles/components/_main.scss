@@ -13,5 +13,22 @@
 		gap: 0;
 		margin-top: 1em;
 		// border: 2px solid red;
+
+		h1 {
+			@include font-size(22px, 28px);
+			font-weight: 500;
+			font-style: italic;
+			color: $mainColor;
+			padding: 0 1em;
+			margin-bottom: 1em;
+			text-align: center;
+		}
+		h2 {
+			@include font-size(20px, 26px);
+			padding: 0 1em;
+			font-weight: 300;
+			margin-bottom: 0.5em;
+			text-align: center;
+		}
 	}
 }

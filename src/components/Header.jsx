@@ -77,11 +77,12 @@ export const Header = ({
 				<h3>
 					<a
 						className='logo'
+						id='logo'
 						href={geninfo[0].webpage}
 						target='_blank'
 						rel='noreferrer'
 					>
-						<i>Quotes</i>
+						<i>Quotes for life</i>
 					</a>
 				</h3>
 				<div className='line-items'>

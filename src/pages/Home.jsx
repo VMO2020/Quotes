@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import { Header } from '../components/Header';
@@ -24,6 +25,7 @@ import QuotesContextProvider from '../context/QuotesContext';
 import { getLocalStoreValue } from '../helpers/LocalStore';
 
 const Home = ({ loading, error, setAuthorList }) => {
+	let navigate = useNavigate();
 	const [renderHome, setRenderHome] = useState(true);
 
 	// Open states
@@ -65,6 +67,12 @@ const Home = ({ loading, error, setAuthorList }) => {
 		setRenderHome(false);
 	}, [renderHome, setAuthorList, setUser, setDataList, setUserAcceptCookies]);
 
+	useEffect(() => {
+		if (dataList.length < 1 && userAceptCookies) {
+			// console.log('No dataList');
+			navigate('/');
+		}
+	}, []);
 	return (
 		<div className='home-container'>
 			{openMenu && <Menu setOpenMenu={setOpenMenu} active={'quotes'} />}

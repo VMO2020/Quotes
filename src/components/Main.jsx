@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 // Components
 import { Quote } from '../components/Quote';
@@ -20,6 +21,8 @@ export const Main = ({
 	userAceptCookies,
 	setUserAcceptCookies,
 }) => {
+	let navigate = useNavigate();
+
 	const [error, setError] = useState('');
 	const [loading, setLoading] = useState(false);
 	const [renderMain, setRenderMain] = useState(false);
@@ -44,6 +47,8 @@ export const Main = ({
 		// console.log('Cookies Accepted');
 		setOpenCookiesToast(false);
 		setUserAcceptCookies(true);
+		toggleFullScreen();
+		navigate('/');
 	};
 
 	const quotesFiltered = dataList.filter(function (el) {
@@ -53,6 +58,12 @@ export const Main = ({
 	const backToTop = () => {
 		window.location.href = '#top';
 	};
+
+	function toggleFullScreen() {
+		if (!document.fullscreenElement) {
+			document.documentElement.requestFullscreen();
+		}
+	}
 
 	return (
 		<div className='components_main'>
@@ -75,6 +86,11 @@ export const Main = ({
 			{/* {loading && <h3 style={{ color: 'red' }}>Loading...</h3>} */}
 
 			<div className='list-container'>
+				<h2>More than 100 Quotes for Life.</h2>
+				<h1>
+					"Find the best quote to inspire you and live your life happier,
+					better, smarter and funnier."
+				</h1>
 				{AuthorFiltered !== 'all'
 					? quotesFiltered.map((quote) => (
 							<div key={quote._id}>
