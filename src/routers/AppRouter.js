@@ -3,7 +3,6 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 // Routes
 import Home from '../pages/Home';
-import APIdata from '../pages/APIdata';
 import { Users } from '../pages/Users';
 import { Authors } from '../pages/Authors';
 import { PrivacyPolicy } from '../pages/PrivacyPolicy';
@@ -21,8 +20,7 @@ export const AppRouter = () => {
 				<AuthorContextProvider>
 					<QuotesContextProvider>
 						<Routes>
-							<Route path='/' element={<APIdata />} />
-							<Route path='/quotes' element={<Home />} />
+							<Route path='/' element={<Home />} />
 							<Route path='/users' element={<Users />} />
 							<Route path='/authors' element={<Authors />} />
 

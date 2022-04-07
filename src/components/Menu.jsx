@@ -30,7 +30,7 @@ export const Menu = ({ setOpenMenu, active }) => {
 				</span>
 				<h2 className='menu-title'>MENU</h2>
 				<div className='links-container'>
-					<Link to='/quotes' style={{ textDecoration: 'none' }}>
+					<Link to='/' style={{ textDecoration: 'none' }}>
 						<span className={active === 'quotes' ? 'active' : 'link'}>
 							Quotes
 						</span>
