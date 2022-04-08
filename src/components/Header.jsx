@@ -6,6 +6,7 @@ import { clearLocalStoreValue } from '../helpers/LocalStore';
 // Icons
 import { ReactComponent as IconFace } from '../assets/icons/ui/face_nc.svg';
 import { ReactComponent as IconShare } from '../assets/icons/ui/share_nc.svg';
+import { ReactComponent as IconMenu } from '../assets/icons/ui/menu.svg';
 
 // Read JSON Data
 const geninfo = require('../data/geninfo.json').data;
@@ -16,6 +17,7 @@ export const Header = ({
 	authorList,
 	setUser,
 	setAvatar,
+	setOpenMenu,
 	setUserAdmin,
 	setAuthorFiltered,
 	setOpenLogin,
@@ -33,6 +35,7 @@ export const Header = ({
 
 	const handleLogin = () => {
 		setOpenLogin(true);
+		toggleFullScreen();
 	};
 
 	const handleShare = () => {
@@ -71,6 +74,17 @@ export const Header = ({
 		setOpenEditUserForm(true);
 	};
 
+	const handleMenu = () => {
+		setOpenMenu(true);
+		toggleFullScreen();
+	};
+
+	function toggleFullScreen() {
+		if (!document.fullscreenElement) {
+			document.documentElement.requestFullscreen();
+		}
+	}
+
 	return (
 		<div>
 			<div className='component_header-line line1'>
@@ -100,6 +114,9 @@ export const Header = ({
 							Sign up
 						</button>
 					)}
+					<button className='icon' onClick={handleMenu}>
+						<IconMenu />
+					</button>
 					{avatar ? (
 						<img
 							onClick={() => handleEditUser()}

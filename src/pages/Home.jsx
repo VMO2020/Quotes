@@ -136,6 +136,7 @@ const Home = ({ loading, error, setAuthorList }) => {
 					authorList={authorList}
 					setUser={setUser}
 					setAvatar={setAvatar}
+					setOpenMenu={setOpenMenu}
 					setUserAdmin={setUserAdmin}
 					setAuthorFiltered={setAuthorFiltered}
 					setOpenLogin={setOpenLogin}

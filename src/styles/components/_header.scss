@@ -2,7 +2,8 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	height: 5vh;
+	height: 4.5vh;
+	padding-top: 0.3em;
 	padding-left: 0.3em;
 	padding-right: 0.3em;
 
@@ -59,10 +60,16 @@
 				}
 			}
 		}
+		button.icon {
+			border: none;
+			margin-left: 1.5em;
+		}
 
 		button.author-register,
 		button.quote-register {
+			@include font-size(14px, 22px);
 			border: none;
+			padding-right: 0;
 		}
 
 		.custom-select {
@@ -80,16 +87,45 @@
 	}
 }
 
+// Small Mobile
+@media only screen and (max-width: 320px) {
+	.component_header-line {
+		padding-top: 0;
+
+		.line-items {
+			button.author-register,
+			button.quote-register {
+				font-size: 12px;
+				border: none;
+			}
+		}
+	}
+}
+
+// Mobile Big
+@media only screen and (min-width: 400px) {
+	.component_header-line {
+		padding-top: 0.5em;
+
+		.line-items {
+			.custom-select {
+				@include font-size(17px, 24px);
+			}
+		}
+	}
+}
+
 // Desktop Size
 @media only screen and (min-width: $maxWidth) {
 	.component_header-line {
 		height: 6vh;
+		padding-top: 0;
 
 		.line-items {
 			.custom-select {
-				@include font-size(14px, 24px);
+				@include font-size(17px, 24px);
 				margin: 0;
-				border: none;
+				// border: none;
 				box-shadow: none;
 			}
 		}
